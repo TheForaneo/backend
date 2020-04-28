@@ -7,39 +7,55 @@ using Microsoft.Extensions.Logging;
 using MongoDB.Driver;  
 using MongoDB.Bson;  
 using webapi.Models;
+using webapi.Services;
 
 namespace webapi.Controllers{
     [ApiController]
-
+    [Route("api/[controller]")]
     public class TallerController : Controller{
-        [Route("RegistarTaller")]
-        [HttpPost]
-        public Boolean RegistarTaller(Taller objT){
-            try{
-                var Client= new MongoClient("mongodb://localhost:27017");
-                var db = Client.GetDatabase("Proyecto");
-                var collection = db.GetCollection<Taller>("Taller");
-                collection.InsertOne(objT);
-                return true;
-            }
-            catch( Exception ex){
-                return false;
-            }
+        private readonly TallerService _tallerService ;
+
+        public TallerController(TallerService tallerService){
+            _tallerService=tallerService;
         }
-        [Route("modificarTaller")]
+
+        [HttpGet]
+        public ActionResult<List<Taller>> Get() => _tallerService.Get();
+
+        [HttpGet("{id:length(24)}", Name="GetTaller")]
+        public ActionResult<Taller> Get(string id){
+            var taller = _tallerService.Get(id);
+            if(taller == null){
+                return NotFound();
+            }
+            return taller;
+        }
+
         [HttpPost]
-        public Boolean modificarTaller(Taller objT){
-            try{
-                var Client= new MongoClient("mongodb://localhost:27017");
-                var db = Client.GetDatabase("Proyecto");
-                var collection = db.GetCollection<Taller>("Taller");
-                var updater = collection.FindOneAndUpdateAsync(Builders<Taller>.Filter.Eq("Id",objT.Id), 
-                Builders<Taller>.Update.Set("nombreTaller",objT.nombreTaller).Set("correo",objT.correo).Set("telefonoFijo",objT.telefonoFijo).Set("celular",objT.celular).Set("nombreDueño",objT.nombreDueño).Set("calle",objT.calle).Set("numExt",objT.numExt).Set("numInt",objT.numInt).Set("colonia",objT.colonia));
-                return true;
+        public ActionResult<Taller> Create(Taller taller){
+            _tallerService.Create(taller);
+
+            return CreatedAtRoute("GetCliente", new {id = taller.Id.ToString()}, taller);
+        }
+
+        [HttpPut]
+        public IActionResult Update(string id, Taller tallerIn){
+            var taller = _tallerService.Get(id);
+            if(taller == null){
+                return NotFound();
             }
-            catch(Exception ex){
-                return false;
+            _tallerService.Update(id, tallerIn);
+            return NoContent();
+        }
+
+        [HttpDelete("{id:length(24)}")]
+        public IActionResult Delete(string id){
+            var taller = _tallerService.Get(id);
+            if(taller==null){
+                return NotFound();
             }
+            _tallerService.Remove(taller.Id);
+            return NoContent();
         }
     }
 }

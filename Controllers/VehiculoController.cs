@@ -7,72 +7,53 @@ using Microsoft.Extensions.Logging;
 using MongoDB.Driver;  
 using MongoDB.Bson;  
 using webapi.Models;
+using webapi.Services;
 
 namespace webapi.Controllers
 {
+    [Route("api/[controller]")]
     [ApiController]
     public class VehiculoController : Controller{
-        [Route("agregarVehiculo")]
-        [HttpPost]
-        public Boolean addVehiculo(Vehiculo objV){
-            try{
-                var Client= new MongoClient("mongodb://localhost:27017");
-                var db = Client.GetDatabase("Proyecto");
-                var collection = db.GetCollection<Vehiculo>("Vehiculo");
-                collection.InsertOne(objV);
-                return true;
-            }
-            catch(Exception ex){
-                return false;
-            }
-             
+        private readonly VehiculoService _vehiculoService;
+        public VehiculoController(VehiculoService vehiculoService){
+            _vehiculoService=vehiculoService;
         }
 
-        [Route("modificarVehiculo")]
-        [HttpPost]
-        public Boolean updateVehiculo(Vehiculo objV){
-            try{
-                var Client= new MongoClient("mongodb://localhost:27017");
-                var db = Client.GetDatabase("Proyecto");
-                var collection = db.GetCollection<Vehiculo>("Vehiculo");
-                var updater = collection.FindOneAndUpdateAsync(Builders<Vehiculo>.Filter.Eq("Id",objV.Id), 
-                Builders<Vehiculo>.Update.Set("modelo", objV.modelo).Set("año", objV.año).Set("marca", objV.marca));
-                return true;
-            }
-            catch(Exception ex){
-                return false;
-
-            }
-
-        }
-
-        [Route ("mostrarTodos")]
         [HttpGet]
-        public object mostarTodos(){
-            var Client= new MongoClient("mongodb://localhost:27017");
-            var db= Client.GetDatabase("Proyecto");
-            var collection = db.GetCollection<Vehiculo>("Vehiculo");
-            return Json(collection);
+        public ActionResult<List<Vehiculo>> Get() => _vehiculoService.Get();
+
+        [HttpGet("{id:length(24)}", Name="GetVehiculo")]
+        public ActionResult<Vehiculo> Get(string id){
+            var vehiculo=_vehiculoService.Get(id);
+            if(vehiculo==null){
+                return NotFound();
+            }
+            return vehiculo;
         }
 
-        [Route ("borrarVehiculo")]
-        [HttpGet]
-        public Boolean borrarVehiculo(string id){
-            try{
-                var Client= new MongoClient("mongodb://localhost:27017");
-                var db = Client.GetDatabase("Proyecto");
-                var collection = db.GetCollection<Vehiculo>("Vehiculo");
+        [HttpPost]
+        public ActionResult<Vehiculo> Create(Vehiculo vehiculo){
+            _vehiculoService.Create(vehiculo);
+            return CreatedAtRoute("GetVehiculo", new{id=vehiculo.Id.ToString()}, vehiculo);
+        }
 
-                var borrarDato = collection.DeleteOneAsync(Builders<Vehiculo>.Filter.Eq("Id", id));
-                return true;
+        [HttpPut]
+        public IActionResult Update(string id, Vehiculo vehiculoIn){
+            var vehiculo = _vehiculoService.Get(id);
+            if(vehiculo == null){
+                return NotFound();
             }
-            catch(Exception ex){
-                return false;
+            //_vehiculoService.Update(id, vehiculoIn);
+            return NoContent();
+        }
+        [HttpDelete("{id:length(24)}")]
+        public IActionResult Delete(string id){
+            var vehiculo = _vehiculoService.Get(id);
+            if(vehiculo == null){
+                return NotFound();
             }
-             
-
-             
-
+            _vehiculoService.Remove(vehiculo.Id);
+            return NoContent();
         }
     }
 }

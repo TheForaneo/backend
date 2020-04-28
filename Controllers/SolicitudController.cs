@@ -7,63 +7,53 @@ using Microsoft.Extensions.Logging;
 using MongoDB.Driver;  
 using MongoDB.Bson;  
 using webapi.Models;
+using webapi.Services;
 
 namespace webapi.Controllers{
+
+    [Route("api/[controller]")]
     [ApiController]
     public class SolicitudController : Controller{
-        [Route("crearSolicitud")]
-        [HttpPost]
-        public Boolean crearSolicitud(Solicitud objS){
-            try{
-                var Client= new MongoClient("mongodb://localhost:27017");
-                var db = Client.GetDatabase("Proyecto");
-                var collection = db.GetCollection<Solicitud>("Solicitud");
-                collection.InsertOne(objS);
-                return true;
-            }
-            catch(Exception ex){
-                return false;
-            }
+        private readonly SolicitudService _solicitudService;
+
+        public SolicitudController(SolicitudService solicitudService){
+            _solicitudService = solicitudService;
         }
-        [Route("mostrarSolicitudes")]
+
         [HttpGet]
-        public object mostrarSolicitudes(){
-            var Client= new MongoClient("mongodb://localhost:27017");
-            var db= Client.GetDatabase("Proyecto");
-            var collection = db.GetCollection<Solicitud>("Solicitud");
-            return Json(collection);
+        public ActionResult<List<Solicitud>> Get() => _solicitudService.Get();
+
+        [HttpGet("{id:length(24)}", Name="GetSolicitud")]
+        public ActionResult<Solicitud> Get(string id){
+            var solicitud = _solicitudService.Get(id);
+            if(solicitud==null){
+                return NotFound();
+            }
+            return solicitud;
         }
-        [Route("modificarSolicitud")]
+
         [HttpPost]
-        public Boolean modificarSolicitud(Solicitud objS){
-            try{
-                var Client= new MongoClient("mongodb://localhost:27017");
-                var db = Client.GetDatabase("Proyecto");
-                var collection = db.GetCollection<Solicitud>("Solicitud");
-                var updater = collection.FindOneAndUpdateAsync(Builders<Solicitud>.Filter.Eq("Id",objS.Id), 
-                Builders<Solicitud>.Update.Set("descripcionProblema", objS.descripcionProblema).Set("tiempoProblema",objS.tiempoProblema));
-                return true;
-            }
-            catch(Exception ex){
-                return false;
-            }
+        public ActionResult<Solicitud> Create(Solicitud solicitud){
+            _solicitudService.Create(solicitud);
+            return CreatedAtRoute("GetSolicitud", new {id = solicitud.Id.ToString()}, solicitud);
         }
-        [Route ("cancelarSolicitud")]
-        [HttpGet]
-        public Boolean cancelarSolicitud(string id){
-            try{
-                var Client= new MongoClient("mongodb://localhost:27017");
-                var db = Client.GetDatabase("Proyecto");
-                var collection = db.GetCollection<Solicitud>("Solicitud");
-
-                var borrarDato = collection.DeleteOneAsync(Builders<Solicitud>.Filter.Eq("Id", id));
-                return true;
+        [HttpPut]
+        public IActionResult Update(string id, Solicitud solicitudIn){
+            var solicitud = _solicitudService.Get(id);
+            if(solicitud==null){
+                return NotFound();
             }
-            catch(Exception ex){
-                return false;
-            }
-
+            _solicitudService.Update(id, solicitudIn);
+            return NoContent();
         }
-
+        [HttpDelete("{id:length(24)}")]
+        public IActionResult Delete(string id){
+            var solicitud = _solicitudService.Get(id);
+            if(solicitud==null){
+                return NotFound();
+            }
+            _solicitudService.Remove(solicitud.Id);
+            return NoContent();
+        }
     }
 }
