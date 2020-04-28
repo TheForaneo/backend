@@ -1,0 +1,2 @@
+{"_id":{"$oid":"5ea3699afeefb279e30e1fe0"},"placa":"QWERTY","modelo":"Versa","año":{"$numberInt":"2020"},"marca":"Nissan","cliente":"123"}
+{"_id":{"$oid":"5ea875033ac9511c90f8b37f"},"placa":"QWERT1","modelo":"sentra","año":{"$numberInt":"2019"},"marca":"Nissan","cliente":"hue"}

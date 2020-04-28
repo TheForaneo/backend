@@ -1,0 +1,2 @@
+{"_id":{"$oid":"5ea73f88eb513a25b118f4f1"},"apellidop":"Amillano","apellidom":"López","nombre":"Kevin","calle":"mi","numCasa":"321","colonia":"casa","celular":"1234567890","correo":"elcacas@gmail.com","contraseña":"123"}
+{"_id":{"$oid":"5ea867d23ac9511c90f8b37e"},"apellidop":"amillano","apellidom":"Lopez","nombre":"osvaldo","calle":"mi","numCasa":"123","colonia":"casa","celular":"0987654321","correo":"heududs@gmail.com","contraseña":"123"}
