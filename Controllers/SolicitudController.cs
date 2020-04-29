@@ -34,6 +34,9 @@ namespace webapi.Controllers{
 
         [HttpPost]
         public ActionResult<Solicitud> Create(Solicitud solicitud){
+            if(_solicitudService.checkFecha(solicitud.placa,solicitud.entrada)<=2){
+                return NoContent();
+            }
             _solicitudService.Create(solicitud);
             return CreatedAtRoute("GetSolicitud", new {id = solicitud.Id.ToString()}, solicitud);
         }

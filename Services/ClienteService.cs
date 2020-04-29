@@ -2,6 +2,7 @@ using webapi.Models;
 using MongoDB.Driver;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 
 namespace webapi.Services{
     public class ClienteService{
@@ -18,11 +19,31 @@ namespace webapi.Services{
 
         public Cliente Get(string id) => _cliente.Find<Cliente>(cliente => cliente.Id == id).FirstOrDefault();
 
+        public List<Cliente> GetC(string correo) => _cliente.Find<Cliente>(cliente => cliente.correo.Equals(correo)).ToList();
+
+        public List<Cliente> GetCel(string celular) => _cliente.Find<Cliente>(cliente => cliente.celular.Equals(celular)).ToList();
+
         public Cliente Create(Cliente cliente){
             _cliente.InsertOne(cliente);
             return cliente;
         } 
-        public void Update(string id, Cliente clienteIn) => _cliente.ReplaceOne(cliente => cliente.Id == id, clienteIn);
+
+        public Boolean checkCorreo(string correo){
+            int cont = GetC(correo).Count();
+            if(cont >= 1){
+                return true;
+            }
+            return false;
+        }
+        public Boolean checkCelular(string celular){
+            int cont = GetC(celular).Count();
+            if(cont >= 1){
+                return true;
+            }
+            return false;
+        }
+        public void Update(string id, Cliente clienteIn) => _cliente.FindOneAndUpdate(cliente=>cliente.Id==id, Builders<Cliente>.Update.Set("apellidop", clienteIn.apellidop).Set("apellidom",clienteIn.apellidom).Set("nombre",clienteIn.Nombre).Set("calle",clienteIn.calle)
+        .Set("numCasa",clienteIn.numCasa).Set("colonia",clienteIn.colonia).Set("celular", clienteIn.celular).Set("correo",clienteIn.correo));
 
         public void Remove(Cliente clienteIn) => _cliente.DeleteOne(cliente => cliente.Id== clienteIn.Id);
 

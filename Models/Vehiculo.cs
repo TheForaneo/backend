@@ -5,6 +5,7 @@ namespace webapi.Models{
     public class Vehiculo{
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
+        [BsonIgnoreIfDefault]
         public string Id { get; set; }
 
         public string placa { get; set;}

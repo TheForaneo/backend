@@ -4,7 +4,8 @@ namespace webapi.Models{
     public class Cliente{
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
-        public string Id { get; set; }
+        [BsonIgnoreIfDefault]
+        public string Id { get; private set; }
         
         [BsonElement ("apellidop")]
         public string apellidop { get; set; }

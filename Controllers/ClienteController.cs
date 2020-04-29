@@ -33,8 +33,10 @@ namespace webapi.Controllers{
 
         [HttpPost]
         public ActionResult<Cliente> Create(Cliente cliente){
+            if(_clienteService.checkCorreo(cliente.correo) && _clienteService.checkCelular(cliente.celular)){
+                return NoContent();
+            }
             _clienteService.Create(cliente);
-
             return CreatedAtRoute("GetCliente", new {id = cliente.Id.ToString()}, cliente);
         }
 

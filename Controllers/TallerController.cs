@@ -33,9 +33,14 @@ namespace webapi.Controllers{
 
         [HttpPost]
         public ActionResult<Taller> Create(Taller taller){
+            if(_tallerService.checkCorreo(taller.correo)){
+                return NoContent();
+            }
+            if(_tallerService.checkCelular(taller.celular)){
+                return NoContent();
+            }
             _tallerService.Create(taller);
-
-            return CreatedAtRoute("GetCliente", new {id = taller.Id.ToString()}, taller);
+            return CreatedAtRoute("GetTaller", new {id = taller.Id.ToString()}, taller);
         }
 
         [HttpPut]

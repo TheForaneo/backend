@@ -5,6 +5,7 @@ namespace webapi.Models{
     public class Taller{
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
+        [BsonIgnoreIfDefault]
         public string Id{get; set;}
         public string nombreTaller{get; set;}
         public string correo{get;set;}

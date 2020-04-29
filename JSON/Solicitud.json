@@ -1,1 +1,1 @@
-{"_id":{"$oid":"5ea3720bfeefb279e30e1fe2"},"claveCliente":"456","placa":"QWERTY","descripcionProblema":"hace ruido","tiempoProblema":"3 semanas","tallerId":"1234"}
+{"_id":{"$oid":"5ea3720bfeefb279e30e1fe2"},"claveCliente":"456","placa":"QWERTY","descripcionProblema":"hace ruido","tiempoProblema":"3 semanas","fechaRealizacion":{"$date":{"$numberLong":"1590213600000"}},"fechaProgramada":{"$date":{"$numberLong":"1590303600000"}},"fechaSalida":{"$date":{"$numberLong":"1590472800000"}},"estado":{"$numberInt":"1"},"tallerId":"1234"}

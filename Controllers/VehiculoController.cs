@@ -33,6 +33,9 @@ namespace webapi.Controllers
 
         [HttpPost]
         public ActionResult<Vehiculo> Create(Vehiculo vehiculo){
+            if(_vehiculoService.checkV(vehiculo.placa)==1){
+                return NoContent();
+            }
             _vehiculoService.Create(vehiculo);
             return CreatedAtRoute("GetVehiculo", new{id=vehiculo.Id.ToString()}, vehiculo);
         }
@@ -44,7 +47,7 @@ namespace webapi.Controllers
                 return NotFound();
             }
             //_vehiculoService.Update(id, vehiculoIn);
-            return NoContent();
+            return Ok();
         }
         [HttpDelete("{id:length(24)}")]
         public IActionResult Delete(string id){
@@ -53,7 +56,7 @@ namespace webapi.Controllers
                 return NotFound();
             }
             _vehiculoService.Remove(vehiculo.Id);
-            return NoContent();
+            return Ok();
         }
     }
 }

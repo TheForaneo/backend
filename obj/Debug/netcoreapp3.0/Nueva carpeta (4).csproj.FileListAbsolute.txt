@@ -23,3 +23,7 @@ C:\Users\El Kevin\Desktop\webapi\obj\Debug\netcoreapp3.0\Nueva carpeta (4).Razor
 C:\Users\El Kevin\Desktop\webapi\obj\Debug\netcoreapp3.0\Nueva carpeta (4).csproj.CopyComplete
 C:\Users\El Kevin\Desktop\webapi\obj\Debug\netcoreapp3.0\Nueva carpeta (4).dll
 C:\Users\El Kevin\Desktop\webapi\obj\Debug\netcoreapp3.0\Nueva carpeta (4).pdb
+C:\Users\El Kevin\Desktop\webapi\bin\Debug\netcoreapp3.0\JSON\Cliente.json
+C:\Users\El Kevin\Desktop\webapi\bin\Debug\netcoreapp3.0\JSON\Solicitud.json
+C:\Users\El Kevin\Desktop\webapi\bin\Debug\netcoreapp3.0\JSON\Taller.json
+C:\Users\El Kevin\Desktop\webapi\bin\Debug\netcoreapp3.0\JSON\Vehiculo.json

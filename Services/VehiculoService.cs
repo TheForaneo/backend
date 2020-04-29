@@ -19,10 +19,18 @@ namespace webapi.Services{
 
         public Vehiculo Get(string id) => _vehiculo.Find<Vehiculo>(vehiculo => vehiculo.Id == id).FirstOrDefault();
 
+        public List<Vehiculo> GetV(string placa) => _vehiculo.Find<Vehiculo>(vehiculo => vehiculo.placa.Equals(placa)).ToList();
+
         public Vehiculo Create(Vehiculo vehiculo){
             _vehiculo.InsertOne(vehiculo);
             return vehiculo;
         }
+
+        public int checkV(string placa) {
+            var cont = GetV(placa).Count;
+            return cont;
+        }
+        
         public void Update(string id, Vehiculo vehiculoIn) => _vehiculo.ReplaceOne(vehiculo => vehiculo.Id == vehiculoIn.Id, vehiculoIn);
 
         public void Remove(Vehiculo vehiculoIn) => _vehiculo.DeleteOne(vehiculo => vehiculo.Id == vehiculoIn.Id);

@@ -2,6 +2,7 @@ using webapi.Models;
 using MongoDB.Driver;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 
 namespace webapi.Services{
     public class SolicitudService{
@@ -18,10 +19,19 @@ namespace webapi.Services{
 
         public Solicitud Get(string id) => _solicitud.Find<Solicitud>(solicitud => solicitud.Id == id).FirstOrDefault();
 
+        public Solicitud GetV(string placa) => _solicitud.Find<Solicitud>(solicitud => solicitud.placa.Equals(placa)).FirstOrDefault();
+
         public Solicitud Create(Solicitud solicitud){
             _solicitud.InsertOne(solicitud);
             return solicitud;
         } 
+        public int checkFecha(string placa, DateTime fecEntrada){
+            var val = GetV(placa);
+            int fecha1 = val.entrada.Hour;
+            int fecha2 = fecEntrada.Hour;
+            int dif = (fecha2 - fecha1);
+            return dif;
+        }
         public void Update(string id, Solicitud solicitudIn) => _solicitud.ReplaceOne(solicitud => solicitud.Id == id, solicitudIn);
 
         public void Remove(Solicitud solicitudIn) => _solicitud.DeleteOne(solicitud => solicitud.Id== solicitudIn.Id);
