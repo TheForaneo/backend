@@ -16,6 +16,6 @@ namespace webapi.Models{
         public string numExt{get;set;}
         public string numInt{get;set;}
         public string colonia{get;set;}
-        public string contraseña{private get;set;}
+        public string contraseña{get;set;}
     }
 }

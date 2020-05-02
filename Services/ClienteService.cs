@@ -19,6 +19,8 @@ namespace webapi.Services{
 
         public Cliente Get(string id) => _cliente.Find<Cliente>(cliente => cliente.Id == id).FirstOrDefault();
 
+        public Cliente GetCorreo(string corro) => _cliente.Find<Cliente>(cliente => cliente.correo == corro).FirstOrDefault();
+
         public List<Cliente> GetC(string correo) => _cliente.Find<Cliente>(cliente => cliente.correo.Equals(correo)).ToList();
 
         public List<Cliente> GetCel(string celular) => _cliente.Find<Cliente>(cliente => cliente.celular.Equals(celular)).ToList();
@@ -27,7 +29,15 @@ namespace webapi.Services{
             _cliente.InsertOne(cliente);
             return cliente;
         } 
-
+        public Cliente iniciaSesion(string correo, string contraseña){
+            var cliente = GetCorreo(correo);
+            if(cliente != null){
+                if(cliente.contraseña.Equals(contraseña)){
+                    return cliente;
+                }
+            }
+            return null;
+        }
         public Boolean checkCorreo(string correo){
             int cont = GetC(correo).Count();
             if(cont >= 1){

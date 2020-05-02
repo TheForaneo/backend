@@ -30,8 +30,8 @@ namespace webapi.Controllers{
             }
             return cliente;
         }
-
-        [HttpPost]
+        
+        [HttpPost("create")]
         public ActionResult<Cliente> Create(Cliente cliente){
             if(_clienteService.checkCorreo(cliente.correo) && _clienteService.checkCelular(cliente.celular)){
                 return NoContent();
@@ -39,7 +39,16 @@ namespace webapi.Controllers{
             _clienteService.Create(cliente);
             return CreatedAtRoute("GetCliente", new {id = cliente.Id.ToString()}, cliente);
         }
-
+        [HttpPost("login")]
+        public ActionResult inicio(UserLogin oj){
+            var user = _clienteService.iniciaSesion(oj.Email, oj.Password);
+            if(user != null){
+                return Ok();
+            }
+            return NotFound();
+            //return RedirectToAction("inicio");
+        }
+        
         [HttpPut]
         public IActionResult Update(string id, Cliente clienteIn){
             var cliente = _clienteService.Get(id);

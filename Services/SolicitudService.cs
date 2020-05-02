@@ -32,6 +32,7 @@ namespace webapi.Services{
             int dif = (fecha2 - fecha1);
             return dif;
         }
+
         public void Update(string id, Solicitud solicitudIn) => _solicitud.ReplaceOne(solicitud => solicitud.Id == id, solicitudIn);
 
         public void Remove(Solicitud solicitudIn) => _solicitud.DeleteOne(solicitud => solicitud.Id== solicitudIn.Id);

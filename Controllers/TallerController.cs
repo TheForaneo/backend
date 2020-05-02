@@ -31,7 +31,7 @@ namespace webapi.Controllers{
             return taller;
         }
 
-        [HttpPost]
+        [HttpPost("create")]
         public ActionResult<Taller> Create(Taller taller){
             if(_tallerService.checkCorreo(taller.correo)){
                 return NoContent();
@@ -42,7 +42,15 @@ namespace webapi.Controllers{
             _tallerService.Create(taller);
             return CreatedAtRoute("GetTaller", new {id = taller.Id.ToString()}, taller);
         }
-
+        [HttpPost("login")]
+        public ActionResult inicio(UserLogin oj){
+            var user = _tallerService.iniciaSesion(oj.Email, oj.Password);
+            if(user != null){
+                return Ok();
+            }
+            return NotFound();
+            //return RedirectToAction("inicio");
+        }
         [HttpPut]
         public IActionResult Update(string id, Taller tallerIn){
             var taller = _tallerService.Get(id);

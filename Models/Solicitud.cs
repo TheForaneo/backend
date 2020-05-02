@@ -23,7 +23,9 @@ namespace webapi.Models{
 
         [BsonElement("fechaSalida")]
         [BsonDateTimeOptions(Kind = DateTimeKind.Utc)]
-        public DateTime Salida{get; set;}
+        public DateTime salida{get; set;}
+
+        public int estado{get; set;}
         public string tallerId{get;set;}
     }
 }

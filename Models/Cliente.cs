@@ -32,6 +32,6 @@ namespace webapi.Models{
         public string correo { get; set; }
 
         [BsonElement ("contraseña")]
-        public string contraseña { private get; set; }
+        public string contraseña { get; set; }
     }
 }

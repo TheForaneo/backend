@@ -19,6 +19,8 @@ namespace webapi.Services{
 
         public Taller Get(string id) => _taller.Find<Taller>(taller => taller.Id == id).FirstOrDefault();
 
+        public Taller GetCorreo(string correo) => _taller.Find<Taller>(taller => taller.correo == correo).FirstOrDefault();
+
         public List<Taller> GetCor(string correo) => _taller.Find<Taller>(taller => taller.correo.Equals(correo)).ToList();
 
         public List<Taller> GetCel(string celular) => _taller.Find<Taller>(taller => taller.celular.Equals(celular)).ToList();
@@ -42,10 +44,17 @@ namespace webapi.Services{
             }
             return false;
         }
-
+        public Taller iniciaSesion(string correo, string contraseña){
+            var taller = GetCorreo(correo);
+            if(taller != null){
+                if(taller.contraseña.Equals(contraseña)){
+                    return taller;
+                }
+            }
+            return null;
+        }
         public void Update(string id, Taller tallerIn) => _taller.ReplaceOne(taller => taller.Id == tallerIn.Id, tallerIn);
         public void Remove(Taller tallerIn) => _taller.DeleteOne(taller => taller.Id== tallerIn.Id);
-
         public void Remove(string id) => _taller.DeleteOne(taller => taller.Id == id);
 
     }
