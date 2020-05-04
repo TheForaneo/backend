@@ -8,6 +8,7 @@ using MongoDB.Driver;
 using MongoDB.Bson;  
 using webapi.Models;
 using webapi.Services;
+using Microsoft.AspNetCore.Authorization;
 
 namespace webapi.Controllers{
 
@@ -21,9 +22,11 @@ namespace webapi.Controllers{
         }
 
         [HttpGet]
+        [Authorize]
         public ActionResult<List<Solicitud>> Get() => _solicitudService.Get();
 
         [HttpGet("{id:length(24)}", Name="GetSolicitud")]
+        [Authorize]
         public ActionResult<Solicitud> Get(string id){
             var solicitud = _solicitudService.Get(id);
             if(solicitud==null){
@@ -41,6 +44,7 @@ namespace webapi.Controllers{
             return CreatedAtRoute("GetSolicitud", new {id = solicitud.Id.ToString()}, solicitud);
         }
         [HttpPut]
+        [Authorize]
         public IActionResult Update(string id, Solicitud solicitudIn){
             var solicitud = _solicitudService.Get(id);
             if(solicitud==null){
@@ -50,6 +54,7 @@ namespace webapi.Controllers{
             return NoContent();
         }
         [HttpDelete("{id:length(24)}")]
+        [Authorize]
         public IActionResult Delete(string id){
             var solicitud = _solicitudService.Get(id);
             if(solicitud==null){

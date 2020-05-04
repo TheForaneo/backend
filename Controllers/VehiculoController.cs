@@ -8,6 +8,7 @@ using MongoDB.Driver;
 using MongoDB.Bson;  
 using webapi.Models;
 using webapi.Services;
+using Microsoft.AspNetCore.Authorization;
 
 namespace webapi.Controllers
 {
@@ -32,6 +33,7 @@ namespace webapi.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public ActionResult<Vehiculo> Create(Vehiculo vehiculo){
             if(_vehiculoService.checkV(vehiculo.placa)==1){
                 return NoContent();
@@ -41,6 +43,7 @@ namespace webapi.Controllers
         }
 
         [HttpPut]
+        [Authorize]
         public IActionResult Update(string id, Vehiculo vehiculoIn){
             var vehiculo = _vehiculoService.Get(id);
             if(vehiculo == null){
@@ -50,6 +53,7 @@ namespace webapi.Controllers
             return Ok();
         }
         [HttpDelete("{id:length(24)}")]
+        [Authorize]
         public IActionResult Delete(string id){
             var vehiculo = _vehiculoService.Get(id);
             if(vehiculo == null){

@@ -8,6 +8,7 @@ using MongoDB.Driver;
 using MongoDB.Bson;  
 using webapi.Models;
 using webapi.Services;
+using Microsoft.AspNetCore.Authorization;
 
 namespace webapi.Controllers{
     [ApiController]
@@ -52,6 +53,7 @@ namespace webapi.Controllers{
             //return RedirectToAction("inicio");
         }
         [HttpPut]
+        [Authorize]
         public IActionResult Update(string id, Taller tallerIn){
             var taller = _tallerService.Get(id);
             if(taller == null){
@@ -62,6 +64,7 @@ namespace webapi.Controllers{
         }
 
         [HttpDelete("{id:length(24)}")]
+        [Authorize]
         public IActionResult Delete(string id){
             var taller = _tallerService.Get(id);
             if(taller==null){
