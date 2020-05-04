@@ -28,7 +28,7 @@ namespace webapi.Controllers{
 
         [HttpPost]
         [Route("[action]")]
-        public ActionResult Login(UserLogin obj){
+        public IActionResult Login(UserLogin obj){
             
             var user = _clienteService.iniciaSesion(obj);
 
@@ -46,7 +46,7 @@ namespace webapi.Controllers{
                 };
                 var tokerHandler = new JwtSecurityTokenHandler();
                 var createdToken = tokerHandler.CreateToken(tokenDescriptor);
-                return Content(createdToken.ToString());
+                return Content(tokerHandler.WriteToken(createdToken));
             }
             return NoContent();
         }
