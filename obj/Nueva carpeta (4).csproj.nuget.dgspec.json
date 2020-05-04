@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\El Kevin\\Desktop\\webapi\\Nueva carpeta (4).csproj": {}
+    "C:\\Users\\El Kevin\\Desktop\\webapi - copia\\Nueva carpeta (4).csproj": {}
   },
   "projects": {
-    "C:\\Users\\El Kevin\\Desktop\\webapi\\Nueva carpeta (4).csproj": {
+    "C:\\Users\\El Kevin\\Desktop\\webapi - copia\\Nueva carpeta (4).csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\El Kevin\\Desktop\\webapi\\Nueva carpeta (4).csproj",
+        "projectUniqueName": "C:\\Users\\El Kevin\\Desktop\\webapi - copia\\Nueva carpeta (4).csproj",
         "projectName": "Nueva carpeta (4)",
-        "projectPath": "C:\\Users\\El Kevin\\Desktop\\webapi\\Nueva carpeta (4).csproj",
+        "projectPath": "C:\\Users\\El Kevin\\Desktop\\webapi - copia\\Nueva carpeta (4).csproj",
         "packagesPath": "C:\\Users\\El Kevin\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\El Kevin\\Desktop\\webapi\\obj\\",
+        "outputPath": "C:\\Users\\El Kevin\\Desktop\\webapi - copia\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -39,6 +39,14 @@
       "frameworks": {
         "netcoreapp3.0": {
           "dependencies": {
+            "JWT": {
+              "target": "Package",
+              "version": "[6.1.4, )"
+            },
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[3.0.0, )"
+            },
             "MongoDB.Driver": {
               "target": "Package",
               "version": "[2.10.3, )"

@@ -27,3 +27,41 @@ C:\Users\El Kevin\Desktop\webapi\bin\Debug\netcoreapp3.0\JSON\Cliente.json
 C:\Users\El Kevin\Desktop\webapi\bin\Debug\netcoreapp3.0\JSON\Solicitud.json
 C:\Users\El Kevin\Desktop\webapi\bin\Debug\netcoreapp3.0\JSON\Taller.json
 C:\Users\El Kevin\Desktop\webapi\bin\Debug\netcoreapp3.0\JSON\Vehiculo.json
+C:\Users\El Kevin\Desktop\webapi - copia\bin\Debug\netcoreapp3.0\appsettings.Development.json
+C:\Users\El Kevin\Desktop\webapi - copia\bin\Debug\netcoreapp3.0\JSON\Cliente.json
+C:\Users\El Kevin\Desktop\webapi - copia\bin\Debug\netcoreapp3.0\JSON\Solicitud.json
+C:\Users\El Kevin\Desktop\webapi - copia\bin\Debug\netcoreapp3.0\JSON\Taller.json
+C:\Users\El Kevin\Desktop\webapi - copia\bin\Debug\netcoreapp3.0\JSON\Vehiculo.json
+C:\Users\El Kevin\Desktop\webapi - copia\bin\Debug\netcoreapp3.0\Properties\launchSettings.json
+C:\Users\El Kevin\Desktop\webapi - copia\bin\Debug\netcoreapp3.0\appsettings.json
+C:\Users\El Kevin\Desktop\webapi - copia\bin\Debug\netcoreapp3.0\Nueva carpeta (4).exe
+C:\Users\El Kevin\Desktop\webapi - copia\bin\Debug\netcoreapp3.0\Nueva carpeta (4).deps.json
+C:\Users\El Kevin\Desktop\webapi - copia\bin\Debug\netcoreapp3.0\Nueva carpeta (4).runtimeconfig.json
+C:\Users\El Kevin\Desktop\webapi - copia\bin\Debug\netcoreapp3.0\Nueva carpeta (4).runtimeconfig.dev.json
+C:\Users\El Kevin\Desktop\webapi - copia\bin\Debug\netcoreapp3.0\Nueva carpeta (4).dll
+C:\Users\El Kevin\Desktop\webapi - copia\bin\Debug\netcoreapp3.0\Nueva carpeta (4).pdb
+C:\Users\El Kevin\Desktop\webapi - copia\bin\Debug\netcoreapp3.0\DnsClient.dll
+C:\Users\El Kevin\Desktop\webapi - copia\bin\Debug\netcoreapp3.0\JWT.dll
+C:\Users\El Kevin\Desktop\webapi - copia\bin\Debug\netcoreapp3.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\El Kevin\Desktop\webapi - copia\bin\Debug\netcoreapp3.0\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\El Kevin\Desktop\webapi - copia\bin\Debug\netcoreapp3.0\Microsoft.IdentityModel.Logging.dll
+C:\Users\El Kevin\Desktop\webapi - copia\bin\Debug\netcoreapp3.0\Microsoft.IdentityModel.Protocols.dll
+C:\Users\El Kevin\Desktop\webapi - copia\bin\Debug\netcoreapp3.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Users\El Kevin\Desktop\webapi - copia\bin\Debug\netcoreapp3.0\Microsoft.IdentityModel.Tokens.dll
+C:\Users\El Kevin\Desktop\webapi - copia\bin\Debug\netcoreapp3.0\MongoDB.Bson.dll
+C:\Users\El Kevin\Desktop\webapi - copia\bin\Debug\netcoreapp3.0\MongoDB.Driver.dll
+C:\Users\El Kevin\Desktop\webapi - copia\bin\Debug\netcoreapp3.0\MongoDB.Driver.Core.dll
+C:\Users\El Kevin\Desktop\webapi - copia\bin\Debug\netcoreapp3.0\MongoDB.Libmongocrypt.dll
+C:\Users\El Kevin\Desktop\webapi - copia\bin\Debug\netcoreapp3.0\Newtonsoft.Json.dll
+C:\Users\El Kevin\Desktop\webapi - copia\bin\Debug\netcoreapp3.0\SharpCompress.dll
+C:\Users\El Kevin\Desktop\webapi - copia\bin\Debug\netcoreapp3.0\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\El Kevin\Desktop\webapi - copia\obj\Debug\netcoreapp3.0\Nueva carpeta (4).csprojAssemblyReference.cache
+C:\Users\El Kevin\Desktop\webapi - copia\obj\Debug\netcoreapp3.0\staticwebassets\Nueva carpeta (4).StaticWebAssets.Manifest.cache
+C:\Users\El Kevin\Desktop\webapi - copia\obj\Debug\netcoreapp3.0\staticwebassets\Nueva carpeta (4).StaticWebAssets.xml
+C:\Users\El Kevin\Desktop\webapi - copia\obj\Debug\netcoreapp3.0\Nueva carpeta (4).MvcApplicationPartsAssemblyInfo.cache
+C:\Users\El Kevin\Desktop\webapi - copia\obj\Debug\netcoreapp3.0\Nueva carpeta (4).AssemblyInfoInputs.cache
+C:\Users\El Kevin\Desktop\webapi - copia\obj\Debug\netcoreapp3.0\Nueva carpeta (4).AssemblyInfo.cs
+C:\Users\El Kevin\Desktop\webapi - copia\obj\Debug\netcoreapp3.0\Nueva carpeta (4).RazorTargetAssemblyInfo.cache
+C:\Users\El Kevin\Desktop\webapi - copia\obj\Debug\netcoreapp3.0\Nueva carpeta (4).csproj.CopyComplete
+C:\Users\El Kevin\Desktop\webapi - copia\obj\Debug\netcoreapp3.0\Nueva carpeta (4).dll
+C:\Users\El Kevin\Desktop\webapi - copia\obj\Debug\netcoreapp3.0\Nueva carpeta (4).pdb

@@ -29,10 +29,10 @@ namespace webapi.Services{
             _cliente.InsertOne(cliente);
             return cliente;
         } 
-        public Cliente iniciaSesion(string correo, string contraseña){
-            var cliente = GetCorreo(correo);
+        public Cliente iniciaSesion(UserLogin cli){
+            var cliente = GetCorreo(cli.Email);
             if(cliente != null){
-                if(cliente.contraseña.Equals(contraseña)){
+                if(cliente.contraseña.Equals(cli.Password)){
                     return cliente;
                 }
             }

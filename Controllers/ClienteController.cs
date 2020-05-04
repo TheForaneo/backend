@@ -8,6 +8,7 @@ using MongoDB.Driver;
 using MongoDB.Bson;  
 using webapi.Models;
 using webapi.Services;
+using Microsoft.AspNetCore.Authorization;
 
 namespace webapi.Controllers{
 
@@ -31,25 +32,24 @@ namespace webapi.Controllers{
             return cliente;
         }
         
-        [HttpPost("create")]
+        [HttpPost]
         public ActionResult<Cliente> Create(Cliente cliente){
-            if(_clienteService.checkCorreo(cliente.correo) && _clienteService.checkCelular(cliente.celular)){
+            if(_clienteService.checkCorreo(cliente.correo) || _clienteService.checkCelular(cliente.celular)){
                 return NoContent();
             }
             _clienteService.Create(cliente);
             return CreatedAtRoute("GetCliente", new {id = cliente.Id.ToString()}, cliente);
         }
+        /*
         [HttpPost("login")]
         public ActionResult inicio(UserLogin oj){
-            var user = _clienteService.iniciaSesion(oj.Email, oj.Password);
-            if(user != null){
-                return Ok();
-            }
+            
             return NotFound();
             //return RedirectToAction("inicio");
         }
-        
+        */
         [HttpPut]
+        [Authorize]
         public IActionResult Update(string id, Cliente clienteIn){
             var cliente = _clienteService.Get(id);
             if(cliente == null){
@@ -60,6 +60,7 @@ namespace webapi.Controllers{
         }
 
         [HttpDelete("{id:length(24)}")]
+        [Authorize]
         public IActionResult Delete(string id){
             var cliente = _clienteService.Get(id);
             if(cliente==null){
