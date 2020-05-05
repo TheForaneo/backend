@@ -33,7 +33,42 @@ namespace webapi.Services{
             return dif;
         }
 
-        public void Update(string id, Solicitud solicitudIn) => _solicitud.ReplaceOne(solicitud => solicitud.Id == id, solicitudIn);
+        //public void Update(string id, Solicitud solicitudIn) => _solicitud.ReplaceOne(solicitud => solicitud.Id == id, solicitudIn);
+
+        public void Update(string id, Solicitud solicitudIn){
+            if(solicitudIn!=null){
+                try{
+                    if(!(solicitudIn.placa.Equals(null))){
+                        _solicitud.FindOneAndUpdate(solicitud => solicitud.Id == id, Builders<Solicitud>.Update.Set("placa", solicitudIn.placa));
+                    }
+                }catch(NullReferenceException ex){}
+                try{
+                    if(!(solicitudIn.descripcionProblema.Equals(null))){
+                        _solicitud.FindOneAndUpdate(solicitud => solicitud.Id == id, Builders<Solicitud>.Update.Set("descripcionProblema", solicitudIn.descripcionProblema));
+                    }
+                }catch(NullReferenceException ex){}
+                try{
+                    if(!(solicitudIn.tiempoProblema.Equals(null))){
+                        _solicitud.FindOneAndUpdate(solicitud => solicitud.Id == id, Builders<Solicitud>.Update.Set("tiempoProblema", solicitudIn.tiempoProblema));
+                    }
+                }catch(NullReferenceException ex){}
+                try{
+                    if((solicitudIn.entrada.Equals(null))){
+                        _solicitud.FindOneAndUpdate(solicitud => solicitud.Id == id, Builders<Solicitud>.Update.Set("fechaProgramada", solicitudIn.entrada));
+                    }
+                }catch(NullReferenceException ex){}
+                try{
+                    if((solicitudIn.salida.Equals(null))){
+                        _solicitud.FindOneAndUpdate(solicitud => solicitud.Id==id, Builders<Solicitud>.Update.Set("fechaSalida", solicitudIn.salida));
+                    }
+                }catch(NullReferenceException ex){}
+                try{
+                    if((solicitudIn.estado != 0)){
+                        _solicitud.FindOneAndUpdate(solicitud => solicitud.Id == id, Builders<Solicitud>.Update.Set("estado", solicitudIn.estado)); 
+                    }
+                }catch(NullReferenceException ex){}
+            }
+        }
 
         public void Remove(Solicitud solicitudIn) => _solicitud.DeleteOne(solicitud => solicitud.Id== solicitudIn.Id);
 

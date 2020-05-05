@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\El Kevin\\Desktop\\webapi - copia\\Nueva carpeta (4).csproj": {}
+    "C:\\Users\\El Kevin\\Desktop\\webapi\\Nueva carpeta (4).csproj": {}
   },
   "projects": {
-    "C:\\Users\\El Kevin\\Desktop\\webapi - copia\\Nueva carpeta (4).csproj": {
+    "C:\\Users\\El Kevin\\Desktop\\webapi\\Nueva carpeta (4).csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\El Kevin\\Desktop\\webapi - copia\\Nueva carpeta (4).csproj",
+        "projectUniqueName": "C:\\Users\\El Kevin\\Desktop\\webapi\\Nueva carpeta (4).csproj",
         "projectName": "Nueva carpeta (4)",
-        "projectPath": "C:\\Users\\El Kevin\\Desktop\\webapi - copia\\Nueva carpeta (4).csproj",
+        "projectPath": "C:\\Users\\El Kevin\\Desktop\\webapi\\Nueva carpeta (4).csproj",
         "packagesPath": "C:\\Users\\El Kevin\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\El Kevin\\Desktop\\webapi - copia\\obj\\",
+        "outputPath": "C:\\Users\\El Kevin\\Desktop\\webapi\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

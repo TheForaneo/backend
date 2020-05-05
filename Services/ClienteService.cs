@@ -21,6 +21,8 @@ namespace webapi.Services{
 
         public Cliente GetCorreo(string corro) => _cliente.Find<Cliente>(cliente => cliente.correo == corro).FirstOrDefault();
 
+         public Cliente GetCelular(string celular) => _cliente.Find<Cliente>(cliente => cliente.celular == celular).FirstOrDefault();
+
         public List<Cliente> GetC(string correo) => _cliente.Find<Cliente>(cliente => cliente.correo.Equals(correo)).ToList();
 
         public List<Cliente> GetCel(string celular) => _cliente.Find<Cliente>(cliente => cliente.celular.Equals(celular)).ToList();
@@ -29,8 +31,17 @@ namespace webapi.Services{
             _cliente.InsertOne(cliente);
             return cliente;
         } 
-        public Cliente iniciaSesion(UserLogin cli){
+        public Cliente iniciaSesionEmail(UserEmailLogin cli){
             var cliente = GetCorreo(cli.Email);
+            if(cliente != null){
+                if(cliente.contraseña.Equals(cli.Password)){
+                    return cliente;
+                }
+            }
+            return null;
+        }
+        public Cliente iniciaSesionCell(UserCellLogin cli){
+            var cliente = GetCelular(cli.Cellphone);
             if(cliente != null){
                 if(cliente.contraseña.Equals(cli.Password)){
                     return cliente;
@@ -52,9 +63,59 @@ namespace webapi.Services{
             }
             return false;
         }
-        public void Update(string id, Cliente clienteIn) => _cliente.FindOneAndUpdate(cliente=>cliente.Id==id, Builders<Cliente>.Update.Set("apellidop", clienteIn.apellidop).Set("apellidom",clienteIn.apellidom).Set("nombre",clienteIn.Nombre).Set("calle",clienteIn.calle)
-        .Set("numCasa",clienteIn.numCasa).Set("colonia",clienteIn.colonia).Set("celular", clienteIn.celular).Set("correo",clienteIn.correo));
-
+        //public void Update(string id, Cliente clienteIn) => _cliente.UpdateOne(cliente=>cliente.Id==id, Builders<Cliente>.Update.Set("apellidop", clienteIn.apellidop).Set("apellidom",clienteIn.apellidom).Set("nombre",clienteIn.Nombre).Set("calle",clienteIn.calle).Set("numCasa",clienteIn.numCasa).Set("colonia",clienteIn.colonia).Set("celular", clienteIn.celular).Set("correo",clienteIn.correo));
+        public void Update(String id, Cliente clienteIn){
+            if(clienteIn!=null){
+                try{
+                    if(!(clienteIn.apellidop.Equals(null))){
+                        _cliente.FindOneAndUpdate(cliente => cliente.Id == id, Builders<Cliente>.Update.Set("apellidop", clienteIn.apellidop));
+                    }
+                }
+                catch(NullReferenceException ex){}
+                try{
+                    if(!(clienteIn.apellidom.Equals(null))){
+                        _cliente.FindOneAndUpdate(cliente => cliente.Id == id, Builders<Cliente>.Update.Set("apellidom",clienteIn.apellidom));
+                    }
+                }
+                catch(NullReferenceException ex){}
+                try{
+                    if(!clienteIn.Nombre.Equals(null)){
+                        _cliente.FindOneAndUpdate(cliente => cliente.Id == id, Builders<Cliente>.Update.Set("nombre", clienteIn.Nombre));
+                    }
+                }
+                catch(NullReferenceException ex){}
+                try{
+                    if(!clienteIn.calle.Equals(null)){
+                        _cliente.FindOneAndUpdate(cliente => cliente.Id == id, Builders<Cliente>.Update.Set("calle", clienteIn.calle));
+                    }
+                }
+                catch(NullReferenceException ex){}
+                try{
+                    if(!clienteIn.numCasa.Equals(null)){
+                        _cliente.FindOneAndUpdate(cliente => cliente.Id == id, Builders<Cliente>.Update.Set("numCasa", clienteIn.numCasa));
+                    }
+                }
+                catch(NullReferenceException ex){}
+                try{
+                    if(!clienteIn.colonia.Equals(null)){
+                        _cliente.FindOneAndUpdate(cliente => cliente.Id == id, Builders<Cliente>.Update.Set("colonia", clienteIn.colonia));
+                    }
+                }
+                catch(NullReferenceException ex){}
+                try{
+                    if(!clienteIn.celular.Equals(null)){
+                        _cliente.FindOneAndUpdate(cliente => cliente.Id == id, Builders<Cliente>.Update.Set("celular", clienteIn.celular));
+                    }
+                }
+                catch(NullReferenceException ex){}
+                try{
+                    if(!clienteIn.correo.Equals(null)){
+                        _cliente.FindOneAndUpdate(cliente => cliente.Id == id, Builders<Cliente>.Update.Set("correo", clienteIn.correo));
+                    }
+                }
+                catch(NullReferenceException ex){}
+            }
+        }
         public void Remove(Cliente clienteIn) => _cliente.DeleteOne(cliente => cliente.Id== clienteIn.Id);
 
         public void Remove(string id) => _cliente.DeleteOne(cliente => cliente.Id == id);

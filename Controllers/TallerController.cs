@@ -32,28 +32,22 @@ namespace webapi.Controllers{
             return taller;
         }
 
-        [HttpPost("create")]
+        [HttpPost]
         public ActionResult<Taller> Create(Taller taller){
             if(_tallerService.checkCorreo(taller.correo)){
                 return NoContent();
-            }
-            if(_tallerService.checkCelular(taller.celular)){
+            }else{
+                if(_tallerService.checkCelular(taller.celular)){
                 return NoContent();
+                }else{
+                    _tallerService.Create(taller);
+                    return CreatedAtRoute("GetTaller", new {id = taller.Id.ToString()}, taller);
+                }
             }
-            _tallerService.Create(taller);
-            return CreatedAtRoute("GetTaller", new {id = taller.Id.ToString()}, taller);
         }
-        [HttpPost("login")]
-        public ActionResult inicio(UserLogin oj){
-            var user = _tallerService.iniciaSesion(oj.Email, oj.Password);
-            if(user != null){
-                return Ok();
-            }
-            return NotFound();
-            //return RedirectToAction("inicio");
-        }
+       
         [HttpPut]
-        [Authorize]
+        //[Authorize]
         public IActionResult Update(string id, Taller tallerIn){
             var taller = _tallerService.Get(id);
             if(taller == null){
@@ -64,7 +58,7 @@ namespace webapi.Controllers{
         }
 
         [HttpDelete("{id:length(24)}")]
-        [Authorize]
+        //[Authorize]
         public IActionResult Delete(string id){
             var taller = _tallerService.Get(id);
             if(taller==null){

@@ -65,3 +65,12 @@ C:\Users\El Kevin\Desktop\webapi - copia\obj\Debug\netcoreapp3.0\Nueva carpeta (
 C:\Users\El Kevin\Desktop\webapi - copia\obj\Debug\netcoreapp3.0\Nueva carpeta (4).csproj.CopyComplete
 C:\Users\El Kevin\Desktop\webapi - copia\obj\Debug\netcoreapp3.0\Nueva carpeta (4).dll
 C:\Users\El Kevin\Desktop\webapi - copia\obj\Debug\netcoreapp3.0\Nueva carpeta (4).pdb
+C:\Users\El Kevin\Desktop\webapi\bin\Debug\netcoreapp3.0\JWT.dll
+C:\Users\El Kevin\Desktop\webapi\bin\Debug\netcoreapp3.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\El Kevin\Desktop\webapi\bin\Debug\netcoreapp3.0\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\El Kevin\Desktop\webapi\bin\Debug\netcoreapp3.0\Microsoft.IdentityModel.Logging.dll
+C:\Users\El Kevin\Desktop\webapi\bin\Debug\netcoreapp3.0\Microsoft.IdentityModel.Protocols.dll
+C:\Users\El Kevin\Desktop\webapi\bin\Debug\netcoreapp3.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Users\El Kevin\Desktop\webapi\bin\Debug\netcoreapp3.0\Microsoft.IdentityModel.Tokens.dll
+C:\Users\El Kevin\Desktop\webapi\bin\Debug\netcoreapp3.0\Newtonsoft.Json.dll
+C:\Users\El Kevin\Desktop\webapi\bin\Debug\netcoreapp3.0\System.IdentityModel.Tokens.Jwt.dll

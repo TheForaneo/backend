@@ -22,11 +22,11 @@ namespace webapi.Controllers{
         }
 
         [HttpGet]
-        [Authorize]
+        //[Authorize]
         public ActionResult<List<Solicitud>> Get() => _solicitudService.Get();
 
         [HttpGet("{id:length(24)}", Name="GetSolicitud")]
-        [Authorize]
+        //[Authorize]
         public ActionResult<Solicitud> Get(string id){
             var solicitud = _solicitudService.Get(id);
             if(solicitud==null){
@@ -44,7 +44,7 @@ namespace webapi.Controllers{
             return CreatedAtRoute("GetSolicitud", new {id = solicitud.Id.ToString()}, solicitud);
         }
         [HttpPut]
-        [Authorize]
+        //[Authorize]
         public IActionResult Update(string id, Solicitud solicitudIn){
             var solicitud = _solicitudService.Get(id);
             if(solicitud==null){

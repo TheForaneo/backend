@@ -23,7 +23,12 @@ namespace webapi.Controllers
         [HttpGet]
         public ActionResult<List<Vehiculo>> Get() => _vehiculoService.Get();
 
-        [HttpGet("{id:length(24)}", Name="GetVehiculo")]
+        [HttpGet("{id:length(24)}", Name="GetByCliente")]
+        [Route("[action]")]
+        public ActionResult<List<Vehiculo>> GetByCliente(string cid) => _vehiculoService.GetByCliente(cid);
+
+        [HttpGet("{id:length(24)}", Name="Get")]
+        [Route("action")]
         public ActionResult<Vehiculo> Get(string id){
             var vehiculo=_vehiculoService.Get(id);
             if(vehiculo==null){
@@ -31,7 +36,6 @@ namespace webapi.Controllers
             }
             return vehiculo;
         }
-
         [HttpPost]
         [Authorize]
         public ActionResult<Vehiculo> Create(Vehiculo vehiculo){
@@ -43,13 +47,13 @@ namespace webapi.Controllers
         }
 
         [HttpPut]
-        [Authorize]
+        //[Authorize]
         public IActionResult Update(string id, Vehiculo vehiculoIn){
             var vehiculo = _vehiculoService.Get(id);
             if(vehiculo == null){
                 return NotFound();
             }
-            //_vehiculoService.Update(id, vehiculoIn);
+            _vehiculoService.Update(id, vehiculoIn);
             return Ok();
         }
         [HttpDelete("{id:length(24)}")]
@@ -59,6 +63,7 @@ namespace webapi.Controllers
             if(vehiculo == null){
                 return NotFound();
             }
+            var filter = Builders<BsonDocument>.Filter.Eq("id",id);
             _vehiculoService.Remove(vehiculo.Id);
             return Ok();
         }

@@ -22,7 +22,7 @@ namespace webapi.Controllers{
         }
         [HttpGet]
         public ActionResult<List<Cliente>> Get() => _clienteService.Get();
-
+        
         [HttpGet("{id:length(24)}", Name="GetCliente")]
         public ActionResult<Cliente> Get(string id){
             var cliente = _clienteService.Get(id);
@@ -49,7 +49,7 @@ namespace webapi.Controllers{
         }
         */
         [HttpPut]
-        [Authorize]
+        //[Authorize]
         public IActionResult Update(string id, Cliente clienteIn){
             var cliente = _clienteService.Get(id);
             if(cliente == null){

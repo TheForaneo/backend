@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 
 namespace webapi.Models{
-    public class UserLogin{
+    public class UserEmailLogin{
     [Required]
     [EmailAddress]
     public string Email { get; set; }
