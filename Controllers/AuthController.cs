@@ -33,53 +33,39 @@ namespace webapi.Controllers{
         [HttpPost]
         [Route("[action]")]
         public IActionResult LoginEmail(UserEmailLogin obj){
-            
+
+            IActionResult response = Unauthorized();  
             var userC = _clienteService.iniciaSesionEmail(obj);
             var userT = _tallerService.iniciaSesionEmail(obj);
-
             if(userC != null){
-                var SecretKey = _configuration.GetValue<string>("SecretKey");
-                var key = Encoding.ASCII.GetBytes(SecretKey);
-
-                var tokenDescriptor = new SecurityTokenDescriptor{
-                    Subject = new ClaimsIdentity(new Claim[]{
-                        new Claim(ClaimTypes.NameIdentifier, userC.Id.ToString()),
-                        new Claim(ClaimTypes.Email, userC.correo)
-                    }),
-                    Expires = DateTime.UtcNow.AddDays(1),
-                    SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
-                };
-                var tokerHandler = new JwtSecurityTokenHandler();
-                var createdToken = tokerHandler.CreateToken(tokenDescriptor);
-                return Content(tokerHandler.WriteToken(createdToken));
+                var tokenString = GenerateJSONWebToken(userC);
+                response = Ok(new { token = tokenString});
             }
             if(userT != null){
-                var SecretKey =_configuration.GetValue<string>("SecretKey");
-                var key = Encoding.ASCII.GetBytes(SecretKey);
-
-                var tokenDescriptor = new SecurityTokenDescriptor{
-                    Subject = new ClaimsIdentity(new Claim[]{
-                        new Claim(ClaimTypes.NameIdentifier, userT.Id.ToString()),
-                        new Claim(ClaimTypes.Email, userT.correo)
-                    }),
-                    Expires = DateTime.UtcNow.AddDays(1),
-                    SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
-                };
-                var tokerHandler = new JwtSecurityTokenHandler();
-                var createdToken = tokerHandler.CreateToken(tokenDescriptor);
-                return Ok(createdToken);
+                var tokenString = GenerateJSONWebToken(userT);
+                response = Ok(new {token = tokenString});
             }
-            return NoContent();
+            return response;
         }
-
         [HttpPost]
         [Route("[action]")]
         public IActionResult LoginCellphone(UserCellLogin obj){
+
+            IActionResult response = Unauthorized();  
             var userC = _clienteService.iniciaSesionCell(obj);
             var userT = _tallerService.iniciaSesionCell(obj);
-
-            if(userC != null){
-                var SecretKey = _configuration.GetValue<string>("SecretKey");
+            if(userC != null ){
+                var tokenString = GenerateJSONWebToken(userC);
+                response = Ok(new { token = tokenString});
+            }
+            if(userT != null){
+                var tokenString = GenerateJSONWebToken(userT);
+                response = Ok(new { token = tokenString});
+            }
+            return response;
+        }
+        public string GenerateJSONWebToken(Cliente userC){
+            var SecretKey = _configuration.GetValue<string>("SecretKey");
                 var key = Encoding.ASCII.GetBytes(SecretKey);
 
                 var tokenDescriptor = new SecurityTokenDescriptor{
@@ -92,10 +78,10 @@ namespace webapi.Controllers{
                 };
                 var tokerHandler = new JwtSecurityTokenHandler();
                 var createdToken = tokerHandler.CreateToken(tokenDescriptor);
-                return Content(tokerHandler.WriteToken(createdToken));
-            }
-            if(userT != null){
-                var SecretKey =_configuration.GetValue<string>("SecretKey");
+                return tokerHandler.WriteToken(createdToken);
+        }
+        public string GenerateJSONWebToken(Taller userT){
+            var SecretKey = _configuration.GetValue<string>("SecretKey");
                 var key = Encoding.ASCII.GetBytes(SecretKey);
 
                 var tokenDescriptor = new SecurityTokenDescriptor{
@@ -108,9 +94,7 @@ namespace webapi.Controllers{
                 };
                 var tokerHandler = new JwtSecurityTokenHandler();
                 var createdToken = tokerHandler.CreateToken(tokenDescriptor);
-                return Content(tokerHandler.WriteToken(createdToken));
-            }
-            return NoContent();
+                return tokerHandler.WriteToken(createdToken);
         }
     }
 }
