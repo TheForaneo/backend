@@ -15,6 +15,7 @@ using Newtonsoft.Json;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using webapi.Models;
+using Microsoft.AspNetCore.Http;
 
 namespace webapi.Controllers{
     [Route("[controller]")]
@@ -39,10 +40,12 @@ namespace webapi.Controllers{
             var userT = _tallerService.iniciaSesionEmail(obj);
             if(userC != null){
                 var tokenString = GenerateJSONWebToken(userC);
+                HttpContext.Session.SetString("token", tokenString);
                 response = Ok(new { token = tokenString});
             }
             if(userT != null){
                 var tokenString = GenerateJSONWebToken(userT);
+                HttpContext.Session.SetString("token", tokenString);
                 response = Ok(new {token = tokenString});
             }
             return response;
@@ -56,13 +59,21 @@ namespace webapi.Controllers{
             var userT = _tallerService.iniciaSesionCell(obj);
             if(userC != null ){
                 var tokenString = GenerateJSONWebToken(userC);
+                HttpContext.Session.SetString("token", tokenString);
                 response = Ok(new { token = tokenString});
             }
             if(userT != null){
                 var tokenString = GenerateJSONWebToken(userT);
+                HttpContext.Session.SetString("token", tokenString);
                 response = Ok(new { token = tokenString});
             }
             return response;
+        }
+        [HttpPost]
+        [Route("[action]")]
+        public IActionResult Logout(){
+            HttpContext.Session.Remove("token");
+            return Ok();
         }
         public string GenerateJSONWebToken(Cliente userC){
             var SecretKey = _configuration.GetValue<string>("SecretKey");
