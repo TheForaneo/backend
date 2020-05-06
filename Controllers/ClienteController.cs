@@ -23,11 +23,9 @@ namespace webapi.Controllers{
         }
         
         [HttpGet]
-        //[Authorize]
         public ActionResult<List<Cliente>> Get() => _clienteService.Get();
         
         [HttpGet("{id:length(24)}", Name="GetCliente")]
-        //[Authorize]
         public ActionResult<Cliente> Get(string id){
             var cliente = _clienteService.Get(id);
             if(cliente == null){
@@ -37,6 +35,7 @@ namespace webapi.Controllers{
         }
         
         [HttpPost]
+        [AllowAnonymous]
         public ActionResult<Cliente> Create(Cliente cliente){
             if(_clienteService.checkCorreo(cliente.correo) || _clienteService.checkCelular(cliente.celular)){
                 return NoContent();
@@ -53,7 +52,6 @@ namespace webapi.Controllers{
         }
         */
         [HttpPut]
-        //[Authorize]
         public IActionResult Update(string id, Cliente clienteIn){
             var cliente = _clienteService.Get(id);
             if(cliente == null){
@@ -64,7 +62,6 @@ namespace webapi.Controllers{
         }
 
         [HttpDelete("{id:length(24)}")]
-        //[Authorize]
         public IActionResult Delete(string id){
             var cliente = _clienteService.Get(id);
             if(cliente==null){

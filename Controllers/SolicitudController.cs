@@ -14,6 +14,7 @@ namespace webapi.Controllers{
 
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class SolicitudController : Controller{
         private readonly SolicitudService _solicitudService;
 
@@ -22,12 +23,9 @@ namespace webapi.Controllers{
         }
         
         [HttpGet]
-        //[Authorize]
         public ActionResult<List<Solicitud>> Get() => _solicitudService.Get();
-        
 
         [HttpGet("{id:length(24)}", Name="SolicitudesByCliente")]
-        //[Authorize]
         [Route("[action]")]
         public ActionResult<List<Solicitud>> SolicitudesByCliente(string clienteid){ 
             if(_solicitudService.GetSolicitudesByCliente(clienteid).Count >= 1){
@@ -37,7 +35,6 @@ namespace webapi.Controllers{
         } 
 
         [HttpGet("{id:length(24)}", Name="GetSolicitud")]
-        //[Authorize]
         [Route("[action]")]
         public ActionResult<Solicitud> GetSolicitud(string id){
             var solicitud = _solicitudService.Get(id);
@@ -48,7 +45,6 @@ namespace webapi.Controllers{
         }
 
         [HttpPost]
-        //[Authorize]
         public ActionResult<Solicitud> Create(Solicitud solicitud){
             if(solicitud==null/*_solicitudService.checkFecha(solicitud.placa, solicitud.entrada)<=2*/){
                 return NoContent();
@@ -57,7 +53,6 @@ namespace webapi.Controllers{
             return CreatedAtRoute("GetSolicitud", new {id = solicitud.Id.ToString()}, solicitud);
         }
         [HttpPut]
-        //[Authorize]
         public IActionResult Update(string id, Solicitud solicitudIn){
             var solicitud = _solicitudService.Get(id);
             if(solicitud==null){
@@ -67,7 +62,6 @@ namespace webapi.Controllers{
             return Ok();
         }
         [HttpDelete("{id:length(24)}")]
-        //[Authorize]
         public IActionResult Delete(string id){
             var solicitud = _solicitudService.Get(id);
             if(solicitud==null){

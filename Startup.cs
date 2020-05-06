@@ -30,7 +30,7 @@ namespace Nueva_carpeta__4_
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            var key = Encoding.ASCII.GetBytes(Configuration.GetValue<string>("secretkey"));
+            var key = Encoding.ASCII.GetBytes(Configuration.GetValue<string>("SecretKey"));
             services.AddAuthentication(x =>
             {
                 x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -84,10 +84,10 @@ namespace Nueva_carpeta__4_
 
             app.UseRouting();
 
+            app.UseAuthentication();
+            
             app.UseAuthorization();
             
-            app.UseAuthentication();
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

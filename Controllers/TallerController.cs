@@ -13,18 +13,18 @@ using Microsoft.AspNetCore.Authorization;
 namespace webapi.Controllers{
     [ApiController]
     [Route("api/[controller]")]
+    [Authorize]
     public class TallerController : Controller{
         private readonly TallerService _tallerService ;
 
         public TallerController(TallerService tallerService){
             _tallerService=tallerService;
         }
-        /*
+        
         [HttpGet]
         public ActionResult<List<Taller>> Get() => _tallerService.Get();
-        */
+
         [HttpGet("{id:length(24)}", Name="GetTaller")]
-        //[Authorize]
         public ActionResult<Taller> Get(string id){
             var taller = _tallerService.Get(id);
             if(taller == null){
@@ -34,6 +34,7 @@ namespace webapi.Controllers{
         }
 
         [HttpPost]
+        [AllowAnonymous]
         public ActionResult<Taller> Create(Taller taller){
             if(_tallerService.checkCorreo(taller.correo)){
                 return NoContent();
@@ -48,25 +49,23 @@ namespace webapi.Controllers{
         }
        
         [HttpPut]
-        //[Authorize]
         public IActionResult Update(string id, Taller tallerIn){
             var taller = _tallerService.Get(id);
             if(taller == null){
                 return NotFound();
             }
             _tallerService.Update(id, tallerIn);
-            return NoContent();
+            return Ok();
         }
 
         [HttpDelete("{id:length(24)}")]
-        //[Authorize]
         public IActionResult Delete(string id){
             var taller = _tallerService.Get(id);
             if(taller==null){
                 return NotFound();
             }
             _tallerService.Remove(taller.Id);
-            return NoContent();
+            return Ok();
         }
     }
 }
