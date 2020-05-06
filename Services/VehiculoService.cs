@@ -39,7 +39,9 @@ namespace webapi.Services{
             if(vehiculoIn != null){
                 try{
                     if(!(vehiculoIn.placa.Equals(null))){
-                        _vehiculo.FindOneAndUpdate(vehiculo => vehiculo.Id == id, Builders<Vehiculo>.Update.Set("placa", vehiculoIn.placa));
+                        if(!(checkV(vehiculoIn.placa)>=1)){
+                            _vehiculo.FindOneAndUpdate(vehiculo => vehiculo.Id == id, Builders<Vehiculo>.Update.Set("placa", vehiculoIn.placa));
+                        }
                     }
                 }catch(NullReferenceException ex){}
                 try{

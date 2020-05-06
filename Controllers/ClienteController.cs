@@ -14,16 +14,18 @@ namespace webapi.Controllers{
 
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class ClienteController:Controller{
         private readonly ClienteService _clienteService;
 
         public ClienteController(ClienteService clienteService){
             _clienteService=clienteService;
         }
-        /*
+        
         [HttpGet]
+        //[Authorize]
         public ActionResult<List<Cliente>> Get() => _clienteService.Get();
-        */
+        
         [HttpGet("{id:length(24)}", Name="GetCliente")]
         //[Authorize]
         public ActionResult<Cliente> Get(string id){
