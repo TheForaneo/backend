@@ -21,6 +21,8 @@ namespace webapi.Services{
 
         public Solicitud GetV(string placa) => _solicitud.Find<Solicitud>(solicitud => solicitud.placa.Equals(placa)).FirstOrDefault();
 
+        public List<Solicitud> GetSolicitudesByCliente(string clienteid) => _solicitud.Find<Solicitud>(solicitud => solicitud.claveCliente.Equals(clienteid)).ToList();
+        
         public Solicitud Create(Solicitud solicitud){
             _solicitud.InsertOne(solicitud);
             return solicitud;
@@ -37,6 +39,11 @@ namespace webapi.Services{
 
         public void Update(string id, Solicitud solicitudIn){
             if(solicitudIn!=null){
+                try{
+                    if(!(solicitudIn.claveCliente.Equals(null))){
+                        _solicitud.FindOneAndUpdate(solicitud => solicitud.Id == id, Builders<Solicitud>.Update.Set("claveCliente", solicitudIn.claveCliente));
+                    }
+                }catch(NullReferenceException ex){}
                 try{
                     if(!(solicitudIn.placa.Equals(null))){
                         _solicitud.FindOneAndUpdate(solicitud => solicitud.Id == id, Builders<Solicitud>.Update.Set("placa", solicitudIn.placa));
@@ -65,6 +72,11 @@ namespace webapi.Services{
                 try{
                     if((solicitudIn.estado != 0)){
                         _solicitud.FindOneAndUpdate(solicitud => solicitud.Id == id, Builders<Solicitud>.Update.Set("estado", solicitudIn.estado)); 
+                    }
+                }catch(NullReferenceException ex){}
+                try{
+                    if(!(solicitudIn.tallerId.Equals(null))){
+                        _solicitud.FindOneAndUpdate(solicitud => solicitud.Id == id, Builders<Solicitud>.Update.Set("tallerId", solicitudIn.tallerId)); 
                     }
                 }catch(NullReferenceException ex){}
             }

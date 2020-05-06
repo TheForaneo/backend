@@ -19,10 +19,8 @@ namespace webapi.Controllers
         public VehiculoController(VehiculoService vehiculoService){
             _vehiculoService=vehiculoService;
         }
-
         [HttpGet]
         public ActionResult<List<Vehiculo>> Get() => _vehiculoService.Get();
-
         [HttpGet("{id:length(24)}", Name="GetByCliente")]
         [Route("[action]")]
         public ActionResult<List<Vehiculo>> GetByCliente(string cid) => _vehiculoService.GetByCliente(cid);
@@ -37,7 +35,7 @@ namespace webapi.Controllers
             return vehiculo;
         }
         [HttpPost]
-        [Authorize]
+        //[Authorize]
         public ActionResult<Vehiculo> Create(Vehiculo vehiculo){
             if(_vehiculoService.checkV(vehiculo.placa)==1){
                 return NoContent();

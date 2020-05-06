@@ -19,11 +19,12 @@ namespace webapi.Controllers{
         public TallerController(TallerService tallerService){
             _tallerService=tallerService;
         }
-
+        /*
         [HttpGet]
         public ActionResult<List<Taller>> Get() => _tallerService.Get();
-
+        */
         [HttpGet("{id:length(24)}", Name="GetTaller")]
+        //[Authorize]
         public ActionResult<Taller> Get(string id){
             var taller = _tallerService.Get(id);
             if(taller == null){

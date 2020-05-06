@@ -20,14 +20,26 @@ namespace webapi.Controllers{
         public SolicitudController(SolicitudService solicitudService){
             _solicitudService = solicitudService;
         }
-
+        
         [HttpGet]
         //[Authorize]
         public ActionResult<List<Solicitud>> Get() => _solicitudService.Get();
+        
+
+        [HttpGet("{id:length(24)}", Name="SolicitudesByCliente")]
+        //[Authorize]
+        [Route("[action]")]
+        public ActionResult<List<Solicitud>> SolicitudesByCliente(string clienteid){ 
+            if(_solicitudService.GetSolicitudesByCliente(clienteid).Count >= 1){
+                return _solicitudService.GetSolicitudesByCliente(clienteid);
+            }
+            return NotFound();
+        } 
 
         [HttpGet("{id:length(24)}", Name="GetSolicitud")]
         //[Authorize]
-        public ActionResult<Solicitud> Get(string id){
+        [Route("[action]")]
+        public ActionResult<Solicitud> GetSolicitud(string id){
             var solicitud = _solicitudService.Get(id);
             if(solicitud==null){
                 return NotFound();
@@ -36,8 +48,9 @@ namespace webapi.Controllers{
         }
 
         [HttpPost]
+        //[Authorize]
         public ActionResult<Solicitud> Create(Solicitud solicitud){
-            if(_solicitudService.checkFecha(solicitud.placa,solicitud.entrada)<=2){
+            if(solicitud==null/*_solicitudService.checkFecha(solicitud.placa, solicitud.entrada)<=2*/){
                 return NoContent();
             }
             _solicitudService.Create(solicitud);
@@ -51,17 +64,17 @@ namespace webapi.Controllers{
                 return NotFound();
             }
             _solicitudService.Update(id, solicitudIn);
-            return NoContent();
+            return Ok();
         }
         [HttpDelete("{id:length(24)}")]
-        [Authorize]
+        //[Authorize]
         public IActionResult Delete(string id){
             var solicitud = _solicitudService.Get(id);
             if(solicitud==null){
                 return NotFound();
             }
             _solicitudService.Remove(solicitud.Id);
-            return NoContent();
+            return Ok();
         }
     }
 }

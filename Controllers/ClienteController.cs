@@ -20,10 +20,12 @@ namespace webapi.Controllers{
         public ClienteController(ClienteService clienteService){
             _clienteService=clienteService;
         }
+        /*
         [HttpGet]
         public ActionResult<List<Cliente>> Get() => _clienteService.Get();
-        
+        */
         [HttpGet("{id:length(24)}", Name="GetCliente")]
+        //[Authorize]
         public ActionResult<Cliente> Get(string id){
             var cliente = _clienteService.Get(id);
             if(cliente == null){
@@ -60,7 +62,7 @@ namespace webapi.Controllers{
         }
 
         [HttpDelete("{id:length(24)}")]
-        [Authorize]
+        //[Authorize]
         public IActionResult Delete(string id){
             var cliente = _clienteService.Get(id);
             if(cliente==null){

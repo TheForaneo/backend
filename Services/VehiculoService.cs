@@ -24,8 +24,6 @@ namespace webapi.Services{
 
         public List<Vehiculo> GetV(string placa) => _vehiculo.Find<Vehiculo>(vehiculo => vehiculo.placa.Equals(placa)).ToList();
 
-
-
         public Vehiculo Create(Vehiculo vehiculo){
             _vehiculo.InsertOne(vehiculo);
             return vehiculo;
@@ -58,6 +56,11 @@ namespace webapi.Services{
                 try{
                     if(!(vehiculoIn.marca.Equals(null))){
                         _vehiculo.FindOneAndUpdate(vehiculo => vehiculo.Id==id, Builders<Vehiculo>.Update.Set("marca", vehiculoIn.marca));
+                    }
+                }catch(NullReferenceException ex){}
+                try{
+                    if(!(vehiculoIn.cliente.Equals(null))){
+                        _vehiculo.FindOneAndUpdate(vehiculo => vehiculo.Id==id, Builders<Vehiculo>.Update.Set("cliente", vehiculoIn.cliente));
                     }
                 }catch(NullReferenceException ex){}
             }
