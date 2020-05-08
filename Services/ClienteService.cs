@@ -19,7 +19,7 @@ namespace webapi.Services{
 
         public Cliente Get(string id) => _cliente.Find<Cliente>(cliente => cliente.Id == id).FirstOrDefault();
 
-        public Cliente GetCorreo(string corro) => _cliente.Find<Cliente>(cliente => cliente.correo == corro).FirstOrDefault();
+        public Cliente GetCorreo(string email) => _cliente.Find<Cliente>(cliente => cliente.correo.Equals(email)).FirstOrDefault();
 
          public Cliente GetCelular(string celular) => _cliente.Find<Cliente>(cliente => cliente.celular == celular).FirstOrDefault();
 
@@ -48,6 +48,25 @@ namespace webapi.Services{
                 }
             }
             return null;
+        }
+        public Boolean insertCodigo(Cliente cli, string codigo){
+            var user = GetCorreo(cli.correo);
+            if(user!=null){
+                if(!(codigo.Equals(null))){
+                    _cliente.FindOneAndUpdate(cliente => cliente.correo.Equals(cli.correo), Builders<Cliente>.Update.Set("codigo", codigo));
+                    return true;
+                }
+            }
+            return false;
+        }
+        public Boolean changePassword(Cliente cli, string newPassword){
+            if(cli != null){
+                if(!(newPassword.Equals(null))){
+                    _cliente.FindOneAndUpdate(cliente => cliente.correo.Equals(cli.correo), Builders<Cliente>.Update.Set("contraseña", newPassword));
+                    return true;
+                }
+            }
+            return false;
         }
         public Boolean checkCorreo(string correo){
             int cont = GetC(correo).Count();

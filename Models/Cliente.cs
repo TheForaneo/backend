@@ -33,5 +33,8 @@ namespace webapi.Models{
 
         [BsonElement ("contraseña")]
         public string contraseña { get; set; }
+
+        [BsonElement("codigo")]
+        public string codigo{get; set;}
     }
 }

@@ -1,4 +1,2 @@
-{"_id":{"$oid":"5ea73f88eb513a25b118f4f1"},"apellidop":"Amillano","apellidom":"López","nombre":"Kevin","calle":"mi","numCasa":"321","colonia":"casa","celular":"1234567890","correo":"elcacas@gmail.com","contraseña":"123"}
-{"_id":{"$oid":"5ea867d23ac9511c90f8b37e"},"apellidop":"Contreras","apellidom":"López","nombre":null,"calle":"mi","numCasa":"321","colonia":"casa","celular":"1234567890","correo":"elcacas@gmail.com","contraseña":"123"}
-{"_id":{"$oid":"5ea9b69fc597b845448264d3"},"apellidop":"Contreras","apellidom":"López","nombre":"Osvaldo","calle":"mi","numCasa":"321","colonia":"casa","celular":"1234567890","correo":"elcacas@gmail.com","contraseña":null}
-{"_id":{"$oid":"5ea9b6acc597b845448264d4"},"apellidop":"Contreras","apellidom":"López","nombre":null,"calle":"mi","numCasa":"321","colonia":"casa","celular":"1234567890","correo":"elcacas@gmail.com","contraseña":null}
+{"_id":{"$oid":"5eac75cbec95f30c8ce38b3e"},"apellidop":"Lopez","apellidom":"Amillano","nombre":"Osvaldo","calle":"mi","numCasa":"321","colonia":"casa","celular":"1234567890","correo":"tumamaentanga@hotmail.com","contraseña":"amillano432"}
+{"_id":{"$oid":"5eadf6161d09ce4ac4df1a21"},"apellidop":"Lopez","apellidom":"Contreras","nombre":"kevin","calle":"mi","numCasa":"321","colonia":"casa","celular":"1234567790","correo":"tumamaentang123a@hotmail.com","contraseña":"hue"}

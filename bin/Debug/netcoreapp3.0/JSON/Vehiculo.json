@@ -1,2 +1,3 @@
-{"_id":{"$oid":"5ea3699afeefb279e30e1fe0"},"placa":"QWERTY","modelo":"Versa","año":{"$numberInt":"2020"},"marca":"Nissan","cliente":"123"}
-{"_id":{"$oid":"5ea875033ac9511c90f8b37f"},"placa":"QWERT1","modelo":"sentra","año":{"$numberInt":"2019"},"marca":"Nissan","cliente":"hue"}
+{"_id":{"$oid":"5ea3699afeefb279e30e1fe0"},"año":{"$numberInt":"2020"},"placa":"QWERTY","modelo":"march","marca":"Nissan","cliente":"5eac75cbec95f30c8ce38b3e"}
+{"_id":{"$oid":"5ea875033ac9511c90f8b37f"},"placa":"QWERT1","modelo":"Versa","año":{"$numberInt":"2018"},"marca":"Nissan","cliente":"5ea73f88eb513a25b118f4f1"}
+{"_id":{"$oid":"5eb06d6ec6c8be4498787544"},"placa":"QWERT2","modelo":"Versa","año":{"$numberInt":"2020"},"marca":"Nissan","cliente":"5eac75cbec95f30c8ce38b3e"}

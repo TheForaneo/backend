@@ -74,3 +74,13 @@ C:\Users\El Kevin\Desktop\webapi\bin\Debug\netcoreapp3.0\Microsoft.IdentityModel
 C:\Users\El Kevin\Desktop\webapi\bin\Debug\netcoreapp3.0\Microsoft.IdentityModel.Tokens.dll
 C:\Users\El Kevin\Desktop\webapi\bin\Debug\netcoreapp3.0\Newtonsoft.Json.dll
 C:\Users\El Kevin\Desktop\webapi\bin\Debug\netcoreapp3.0\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\El Kevin\Desktop\webapi\bin\Debug\netcoreapp3.0\MailKit.dll
+C:\Users\El Kevin\Desktop\webapi\bin\Debug\netcoreapp3.0\MimeKit.dll
+C:\Users\El Kevin\Desktop\webapi\bin\Debug\netcoreapp3.0\BouncyCastle.Crypto.dll
+C:\Users\El Kevin\Desktop\webapi\bin\Debug\netcoreapp3.0\Microsoft.AspNet.Identity.Core.dll
+C:\Users\El Kevin\Desktop\webapi\bin\Debug\netcoreapp3.0\Microsoft.AspNet.Identity.Owin.dll
+C:\Users\El Kevin\Desktop\webapi\bin\Debug\netcoreapp3.0\Microsoft.Owin.dll
+C:\Users\El Kevin\Desktop\webapi\bin\Debug\netcoreapp3.0\Microsoft.Owin.Security.dll
+C:\Users\El Kevin\Desktop\webapi\bin\Debug\netcoreapp3.0\Microsoft.Owin.Security.Cookies.dll
+C:\Users\El Kevin\Desktop\webapi\bin\Debug\netcoreapp3.0\Microsoft.Owin.Security.OAuth.dll
+C:\Users\El Kevin\Desktop\webapi\bin\Debug\netcoreapp3.0\Owin.dll

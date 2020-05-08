@@ -1,0 +1,16 @@
+
+
+SubmitDataCliente(){
+
+	if(submit)
+	axios({
+		method: 'post',
+		url:  ' ',
+		data: { "Create": this.$data }
+	}).then(res => {
+		alert('Registro con exito');
+		this.$refs.setAttribute("disabled", "disabled");
+	}).catch(err => {
+		alert('Hubo un error en subir los datos. Detalles: ${err}');
+})
+}

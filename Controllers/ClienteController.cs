@@ -14,16 +14,21 @@ namespace webapi.Controllers{
 
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public class ClienteController:Controller{
         private readonly ClienteService _clienteService;
 
         public ClienteController(ClienteService clienteService){
             _clienteService=clienteService;
         }
-        
-        [HttpGet]
-        public ActionResult<List<Cliente>> Get() => _clienteService.Get();
+        /*
+        [HttpPost]
+        public ActionResult<Cliente> GetCorreo(Cliente cliente){
+            var client = _clienteService.GetCorreo(cliente.correo);
+            return client;
+        }
+        */
+        //public ActionResult<List<Cliente>> Get() => _clienteService.Get();
         
         [HttpGet("{id:length(24)}", Name="GetCliente")]
         public ActionResult<Cliente> Get(string id){
@@ -43,6 +48,7 @@ namespace webapi.Controllers{
             _clienteService.Create(cliente);
             return CreatedAtRoute("GetCliente", new {id = cliente.Id.ToString()}, cliente);
         }
+        
         /*
         [HttpPost("login")]
         public ActionResult inicio(UserLogin oj){
