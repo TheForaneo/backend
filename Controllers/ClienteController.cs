@@ -17,9 +17,11 @@ namespace webapi.Controllers{
     //[Authorize]
     public class ClienteController:Controller{
         private readonly ClienteService _clienteService;
+        private readonly TallerService _tallerService;
 
-        public ClienteController(ClienteService clienteService){
+        public ClienteController(ClienteService clienteService, TallerService tallerService){
             _clienteService=clienteService;
+            _tallerService = tallerService;
         }
         /*
         [HttpPost]
@@ -28,7 +30,7 @@ namespace webapi.Controllers{
             return client;
         }
         */
-        //public ActionResult<List<Cliente>> Get() => _clienteService.Get();
+        public ActionResult<List<Cliente>> Get() => _clienteService.Get();
         
         [HttpGet("{id:length(24)}", Name="GetCliente")]
         public ActionResult<Cliente> Get(string id){
@@ -38,12 +40,23 @@ namespace webapi.Controllers{
             }
             return cliente;
         }
-        
+        [HttpGet("{correo}", Name="GetID")]
+        public string GetID(string correo){
+            string correos =  correo;
+            if(!(correos.Equals(null))){
+                return _clienteService.GetId(correos);
+            }
+            return null;
+        }
+
         [HttpPost]
         [AllowAnonymous]
         public ActionResult<Cliente> Create(Cliente cliente){
-            if(_clienteService.checkCorreo(cliente.correo) || _clienteService.checkCelular(cliente.celular)){
-                return NoContent();
+            string correo= cliente.correo.ToString();
+            var cli = _clienteService.GetCorreo(correo);
+            var tal = _tallerService.GetCorreo(correo);
+            if(cli!=null || tal!=null){
+                return BadRequest();
             }
             _clienteService.Create(cliente);
             return CreatedAtRoute("GetCliente", new {id = cliente.Id.ToString()}, cliente);

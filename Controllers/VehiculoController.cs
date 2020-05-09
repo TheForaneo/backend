@@ -14,7 +14,7 @@ namespace webapi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public class VehiculoController : Controller{
         private readonly VehiculoService _vehiculoService;
         public VehiculoController(VehiculoService vehiculoService){

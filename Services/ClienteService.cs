@@ -21,7 +21,7 @@ namespace webapi.Services{
 
         public Cliente GetCorreo(string email) => _cliente.Find<Cliente>(cliente => cliente.correo.Equals(email)).FirstOrDefault();
 
-         public Cliente GetCelular(string celular) => _cliente.Find<Cliente>(cliente => cliente.celular == celular).FirstOrDefault();
+        public Cliente GetCelular(string celular) => _cliente.Find<Cliente>(cliente => cliente.celular == celular).FirstOrDefault();
 
         public List<Cliente> GetC(string correo) => _cliente.Find<Cliente>(cliente => cliente.correo.Equals(correo)).ToList();
 
@@ -31,6 +31,13 @@ namespace webapi.Services{
             _cliente.InsertOne(cliente);
             return cliente;
         } 
+        public string GetId(string correo){
+            var cliente = this.GetCorreo(correo);
+            if(cliente != null){
+                return cliente.Id.ToString();
+            }   
+            return null;
+        }
         public Cliente iniciaSesionEmail(UserEmailLogin cli){
             var cliente = GetCorreo(cli.Email);
             if(cliente != null){
@@ -68,14 +75,14 @@ namespace webapi.Services{
             }
             return false;
         }
-        public Boolean checkCorreo(string correo){
+        public Boolean correoExist(string correo){
             int cont = GetC(correo).Count();
             if(cont >= 1){
                 return true;
             }
             return false;
         }
-        public Boolean checkCelular(string celular){
+        public Boolean celularExist(string celular){
             int cont = GetC(celular).Count();
             if(cont >= 1){
                 return true;

@@ -16,14 +16,16 @@ namespace webapi.Controllers{
     [Authorize]
     public class TallerController : Controller{
         private readonly TallerService _tallerService ;
+        private readonly ClienteService _clienteService;
 
-        public TallerController(TallerService tallerService){
+        public TallerController(TallerService tallerService, ClienteService clienteService){
             _tallerService=tallerService;
+            _clienteService = clienteService;
         }
-        
+        /*
         [HttpGet]
         public ActionResult<List<Taller>> Get() => _tallerService.Get();
-
+        */
         [HttpGet("{id:length(24)}", Name="GetTaller")]
         public ActionResult<Taller> Get(string id){
             var taller = _tallerService.Get(id);
@@ -36,16 +38,13 @@ namespace webapi.Controllers{
         [HttpPost]
         [AllowAnonymous]
         public ActionResult<Taller> Create(Taller taller){
-            if(_tallerService.checkCorreo(taller.correo)){
-                return NoContent();
-            }else{
-                if(_tallerService.checkCelular(taller.celular)){
-                return NoContent();
-                }else{
-                    _tallerService.Create(taller);
-                    return CreatedAtRoute("GetTaller", new {id = taller.Id.ToString()}, taller);
-                }
+            var cli = _clienteService.GetCorreo(taller.correo);
+            var tal = _tallerService.GetCorreo(taller.correo);
+            if(cli != null || tal != null){
+                return BadRequest();
             }
+            _tallerService.Create(taller);
+            return CreatedAtRoute("GetTaller", new {id = taller.Id.ToString()}, taller);
         }
        
         [HttpPut]

@@ -22,7 +22,7 @@ namespace webapi.Services{
 
         public Taller Get(string id) => _taller.Find<Taller>(taller => taller.Id == id).FirstOrDefault();
 
-        public Taller GetCorreo(string correo) => _taller.Find<Taller>(taller => taller.correo == correo).FirstOrDefault();
+        public Taller GetCorreo(string correo) => _taller.Find<Taller>(taller => taller.correo.Equals(correo)).FirstOrDefault();
 
          public Taller GetCelular(string celular) => _taller.Find<Taller>(taller => taller.celular == celular).FirstOrDefault();
 
@@ -36,15 +36,24 @@ namespace webapi.Services{
             _taller.InsertOne(taller);
             return taller;
         }
-
-        public Boolean checkCorreo(string correo){
+        public Boolean insertCodigo(Taller tal, string codigo){
+            var user = GetCorreo(tal.correo);
+            if(user!=null){
+                if(!(codigo.Equals(null))){
+                    _taller.FindOneAndUpdate(taller => taller.correo.Equals(tal.correo), Builders<Taller>.Update.Set("codigo", codigo));
+                    return true;
+                }
+            }
+            return false;
+        }
+        public Boolean correoExist(string correo){
             int cont = GetCor(correo).Count();
             if(cont >= 1){
                 return true;
             }
             return false;
         }
-        public Boolean checkCelular(string celular){
+        public Boolean celularExist(string celular){
             int cont = GetCel(celular).Count();
             if(cont >= 1){
                 return true;

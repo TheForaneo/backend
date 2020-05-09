@@ -17,5 +17,6 @@ namespace webapi.Models{
         public string numInt{get;set;}
         public string colonia{get;set;}
         public string contraseña{get;set;}
+        public string codigo{get;set;}
     }
 }
