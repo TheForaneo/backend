@@ -9,10 +9,12 @@ using MongoDB.Bson;
 using webapi.Models;
 using webapi.Services;
 using Microsoft.AspNetCore.Authorization;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace webapi.Controllers{
 
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     //[Authorize]
     public class ClienteController:Controller{
@@ -30,6 +32,7 @@ namespace webapi.Controllers{
             return client;
         }
         */
+        [HttpGet]
         public ActionResult<List<Cliente>> Get() => _clienteService.Get();
         
         [HttpGet("{id:length(24)}", Name="GetCliente")]
@@ -41,12 +44,12 @@ namespace webapi.Controllers{
             return cliente;
         }
         [HttpGet("{correo}", Name="GetID")]
-        public string GetID(string correo){
+        public ActionResult GetID(string correo){
             string correos =  correo;
             if(!(correos.Equals(null))){
-                return _clienteService.GetId(correos);
+                return Ok(new { id = _clienteService.GetId(correos)});
             }
-            return null;
+            return BadRequest();
         }
 
         [HttpPost]

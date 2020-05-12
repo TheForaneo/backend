@@ -13,6 +13,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.Net.Http.Headers;
 using webapi.Models;
 using webapi.Services;
 
@@ -70,7 +71,18 @@ namespace Nueva_carpeta__4_
             services.Configure<SolicitudstoreDatabaseSettings>(Configuration.GetSection(nameof(SolicitudstoreDatabaseSettings)));
             services.AddSingleton<ISolicitudstoreDatabaseSettings>(sp => sp.GetRequiredService<IOptions<SolicitudstoreDatabaseSettings>>().Value);
             services.AddSingleton<SolicitudService>();
-            //****************************
+            //***************************
+
+            services.AddCors(options =>
+        {
+            options.AddPolicy("CorsPolicy",
+                builder => builder
+                    .AllowAnyMethod()
+                    .AllowCredentials()
+                    .SetIsOriginAllowed((host) => true)
+                    .AllowAnyHeader());
+            });
+
             services.AddControllers();
         }
 
@@ -84,10 +96,12 @@ namespace Nueva_carpeta__4_
 
             app.UseRouting();
 
+            app.UseCors("CorsPolicy");
+
             app.UseAuthentication();
             
             app.UseAuthorization();
-            
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

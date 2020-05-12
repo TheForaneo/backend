@@ -9,6 +9,7 @@ using MongoDB.Bson;
 using webapi.Models;
 using webapi.Services;
 using Microsoft.AspNetCore.Authorization;
+using System.Web.Http.Cors;
 
 namespace webapi.Controllers
 {
@@ -43,7 +44,7 @@ namespace webapi.Controllers
                 return NoContent();
             }
             _vehiculoService.Create(vehiculo);
-            return CreatedAtRoute("GetVehiculo", new{id=vehiculo.Id.ToString()}, vehiculo);
+            return Ok();
         }
 
         [HttpPut]
