@@ -15,6 +15,7 @@ namespace webapi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+     
     //[Authorize]
     public class VehiculoController : Controller{
         private readonly VehiculoService _vehiculoService;
@@ -40,11 +41,8 @@ namespace webapi.Controllers
         }
         [HttpPost]
         public ActionResult<Vehiculo> Create(Vehiculo vehiculo){
-            if(_vehiculoService.checkV(vehiculo.placa)==1){
-                return NoContent();
-            }
             _vehiculoService.Create(vehiculo);
-            return Ok();
+            return CreatedAtRoute("Get", new {id = vehiculo.Id.ToString()}, vehiculo);
         }
 
         [HttpPut]

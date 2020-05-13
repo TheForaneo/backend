@@ -73,16 +73,8 @@ namespace Nueva_carpeta__4_
             services.AddSingleton<SolicitudService>();
             //***************************
 
-            services.AddCors(options =>
-        {
-            options.AddPolicy("CorsPolicy",
-                builder => builder
-                    .AllowAnyMethod()
-                    .AllowCredentials()
-                    .SetIsOriginAllowed((host) => true)
-                    .AllowAnyHeader());
-            });
-
+            services.AddCors(options => { options.AddPolicy("MyAllowSpecificOrigins", builder => { builder.WithOrigins("localhost:5000", "localhost:8080") .AllowAnyHeader() .AllowAnyMethod(); }); });
+            
             services.AddControllers();
         }
 
@@ -96,7 +88,7 @@ namespace Nueva_carpeta__4_
 
             app.UseRouting();
 
-            app.UseCors("CorsPolicy");
+            app.UseCors("MyAllowSpecificOrigins");
 
             app.UseAuthentication();
             
