@@ -16,6 +16,11 @@ namespace webapi.Models{
         public string numExt{get;set;}
         public string numInt{get;set;}
         public string colonia{get;set;}
+        public string latitud{get; set;}
+        public string longitud{get; set;}
+        public string tipoTaller1{get; set;}
+        public string tipoTaller2{get; set;}
+        public string tipoTaller3{get; set;}
         public string contraseña{get;set;}
         public string codigo{get;set;}
     }

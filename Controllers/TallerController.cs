@@ -13,7 +13,7 @@ using Microsoft.AspNetCore.Authorization;
 namespace webapi.Controllers{
     [ApiController]
     [Route("api/[controller]")]
-    [Authorize]
+    //[Authorize]
     public class TallerController : Controller{
         private readonly TallerService _tallerService ;
         private readonly ClienteService _clienteService;
@@ -22,10 +22,18 @@ namespace webapi.Controllers{
             _tallerService=tallerService;
             _clienteService = clienteService;
         }
-        /*
+        
         [HttpGet]
         public ActionResult<List<Taller>> Get() => _tallerService.Get();
-        */
+        
+        [HttpGet("{tipo}", Name="GetTipo")]
+        public ActionResult<Taller> GetPorTipo(string tipo){
+            var list = _tallerService.BuscarPorTaller(tipo);
+            if(list != null){
+                return Ok(list);
+            }
+            return NotFound();
+        }
         [HttpGet("{id:length(24)}", Name="GetTaller")]
         public ActionResult<Taller> Get(string id){
             var taller = _tallerService.Get(id);

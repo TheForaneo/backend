@@ -72,9 +72,16 @@ namespace Nueva_carpeta__4_
             services.AddSingleton<ISolicitudstoreDatabaseSettings>(sp => sp.GetRequiredService<IOptions<SolicitudstoreDatabaseSettings>>().Value);
             services.AddSingleton<SolicitudService>();
             //***************************
+             //****************************
+            services.Configure<ComentariostoreDatabaseSettings>(Configuration.GetSection(nameof(ComentariostoreDatabaseSettings)));
+            services.AddSingleton<IComentariostoreDatabaseSettings>(sp => sp.GetRequiredService<IOptions<ComentariostoreDatabaseSettings>>().Value);
+            services.AddSingleton<ComentarioService>();
+            //***************************
 
-            services.AddCors(options => { options.AddPolicy("MyAllowSpecificOrigins", builder => { builder.WithOrigins("localhost:5000", "localhost:8080") .AllowAnyHeader() .AllowAnyMethod(); }); });
+            //services.AddCors(options => { options.AddPolicy("MyAllowSpecificOrigins", builder => { builder.WithOrigins("localhost:5000", "localhost:8080") .AllowAnyHeader() .AllowAnyMethod(); }); });
             
+			//services.AddCors(options => { options.AddPolicy("MyAllowSpecificOrigins", builder => { builder.WithOrigins("localhost:8081") .AllowAnyHeader() .AllowAnyMethod(); }); });
+			
             services.AddControllers();
         }
 
@@ -88,7 +95,13 @@ namespace Nueva_carpeta__4_
 
             app.UseRouting();
 
-            app.UseCors("MyAllowSpecificOrigins");
+            //app.UseCors("MyAllowSpecificOrigins");
+			
+			/*
+			app.UseCors(builder => builder.WithOrigins("http://localhost:8081")
+                              .AllowAnyMethod()
+                              .AllowAnyHeader());
+			*/
 
             app.UseAuthentication();
             

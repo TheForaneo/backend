@@ -18,7 +18,7 @@ using webapi.Models;
 using Microsoft.AspNetCore.Http;
 
 namespace webapi.Controllers{
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     [ApiController]
     public class AuthController : Controller{
         private readonly IConfiguration _configuration;
@@ -40,11 +40,11 @@ namespace webapi.Controllers{
             var userT = _tallerService.iniciaSesionEmail(obj);
             if(userC != null){
                 var tokenString = GenerateJSONWebToken(userC);
-                response = Ok(new { token = tokenString});
+                response = Ok(new {tokenString});
             }
             if(userT != null){
                 var tokenString = GenerateJSONWebToken(userT);
-                response = Ok(new {token = tokenString});
+                response = Ok(new  {tokenString});
             }
             return response;
         }
@@ -57,11 +57,11 @@ namespace webapi.Controllers{
             var userT = _tallerService.iniciaSesionCell(obj);
             if(userC != null ){
                 var tokenString = GenerateJSONWebToken(userC);
-                response = Ok(new { token = tokenString});
+                response = Ok(new {tokenString});
             }
             if(userT != null){
                 var tokenString = GenerateJSONWebToken(userT);
-                response = Ok(new { token = tokenString});
+                response = Ok(new {tokenString});
             }
             return response;
         }

@@ -69,6 +69,11 @@ namespace webapi.Services{
                         _solicitud.FindOneAndUpdate(solicitud => solicitud.Id==id, Builders<Solicitud>.Update.Set("fechaSalida", solicitudIn.salida));
                     }
                 }catch(NullReferenceException ex){}
+                 try{
+                    if((solicitudIn.formaPago !=0)){
+                        _solicitud.FindOneAndUpdate(solicitud => solicitud.Id == id, Builders<Solicitud>.Update.Set("formaPago", solicitudIn.formaPago)); 
+                    }
+                }catch(NullReferenceException ex){}
                 try{
                     if((solicitudIn.estado != 0)){
                         _solicitud.FindOneAndUpdate(solicitud => solicitud.Id == id, Builders<Solicitud>.Update.Set("estado", solicitudIn.estado)); 

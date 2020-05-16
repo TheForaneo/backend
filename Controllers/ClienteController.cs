@@ -14,7 +14,7 @@ using Newtonsoft.Json.Linq;
 
 namespace webapi.Controllers{
 
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     [ApiController]
     //[Authorize]
     public class ClienteController:Controller{
@@ -25,15 +25,16 @@ namespace webapi.Controllers{
             _clienteService=clienteService;
             _tallerService = tallerService;
         }
-        /*
+        
         [HttpPost]
         public ActionResult<Cliente> GetCorreo(Cliente cliente){
             var client = _clienteService.GetCorreo(cliente.correo);
             return client;
         }
-        */
+        
         [HttpGet]
         public ActionResult<List<Cliente>> Get() => _clienteService.Get();
+        
         
         [HttpGet("{id:length(24)}", Name="GetCliente")]
         public ActionResult<Cliente> Get(string id){

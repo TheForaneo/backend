@@ -20,6 +20,23 @@ namespace webapi.Services{
 
         public List<Taller> Get() => _taller.Find<Taller>(taller => true).ToList();
 
+        public List<Taller> BuscarPorTaller(string tipo){
+            List<Taller> list1 = _taller.Find<Taller>(taller => taller.tipoTaller1.Equals(tipo)).ToList();
+            List<Taller> list2 = _taller.Find<Taller>(taller => taller.tipoTaller2.Equals(tipo)).ToList();
+            List<Taller> list3 = _taller.Find<Taller>(taller => taller.tipoTaller3.Equals(tipo)).ToList();
+
+            if(list1 != null){
+                if(list2!= null){
+                    if(list3!= null){
+                        return list1.Concat(list2).Concat(list3).ToList();
+                    }
+                    return list1.Concat(list2).ToList();
+                }
+                return list1.ToList();
+            }
+            return null;
+        }
+
         public Taller Get(string id) => _taller.Find<Taller>(taller => taller.Id == id).FirstOrDefault();
 
         public Taller GetCorreo(string correo) => _taller.Find<Taller>(taller => taller.correo.Equals(correo)).FirstOrDefault();
@@ -127,6 +144,32 @@ namespace webapi.Services{
                         _taller.FindOneAndUpdate(taller => taller.Id == id, Builders<Taller>.Update.Set("colonia", tallerIn.colonia));
                     }
                 }catch(NullReferenceException ex){}
+                try{
+                    if(!(tallerIn.latitud.Equals(null))){
+                        _taller.FindOneAndUpdate(taller => taller.Id == id, Builders<Taller>.Update.Set("longitd", tallerIn.latitud));
+                    }
+                }catch(NullReferenceException ex){}
+                try{
+                    if(!(tallerIn.longitud.Equals(null))){
+                        _taller.FindOneAndUpdate(taller => taller.Id == id, Builders<Taller>.Update.Set("longitd", tallerIn.longitud));
+                    }
+                }catch(NullReferenceException ex){}
+                try{
+                    if(!(tallerIn.tipoTaller1.Equals(null))){
+                        _taller.FindOneAndUpdate(taller => taller.Id == id, Builders<Taller>.Update.Set("tipoTaller1", tallerIn.tipoTaller1));
+                    }
+                }catch(NullReferenceException ex){}
+                try{
+                    if(!(tallerIn.tipoTaller2.Equals(null))){
+                        _taller.FindOneAndUpdate(taller => taller.Id == id, Builders<Taller>.Update.Set("tipoTaller2", tallerIn.tipoTaller2));
+                    }
+                }catch(NullReferenceException ex){}
+                try{
+                    if(!(tallerIn.tipoTaller3.Equals(null))){
+                        _taller.FindOneAndUpdate(taller => taller.Id == id, Builders<Taller>.Update.Set("tipoTaller3", tallerIn.tipoTaller3));
+                    }
+                }catch(NullReferenceException ex){}
+                
             }
         }
         public void Remove(Taller tallerIn) => _taller.DeleteOne(taller => taller.Id== tallerIn.Id);

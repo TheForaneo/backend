@@ -25,6 +25,7 @@ namespace webapi.Models{
         [BsonDateTimeOptions(Kind = DateTimeKind.Utc)]
         public DateTime salida{get; set;}
 
+        public int formaPago{get; set;}
         public int estado{get; set;}
         public string tallerId{get;set;}
     }
