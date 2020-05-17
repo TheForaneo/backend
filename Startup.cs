@@ -78,6 +78,12 @@ namespace Nueva_carpeta__4_
             services.AddSingleton<ComentarioService>();
             //***************************
 
+            //****************************
+            services.Configure<MensajeriastoreDatabaseSettings>(Configuration.GetSection(nameof(MensajeriastoreDatabaseSettings)));
+            services.AddSingleton<IMensajeriastoreDatabaseSettings>(sp => sp.GetRequiredService<IOptions<MensajeriastoreDatabaseSettings>>().Value);
+            services.AddSingleton<MensajeriaService>();
+            //****************************
+
             //services.AddCors(options => { options.AddPolicy("MyAllowSpecificOrigins", builder => { builder.WithOrigins("localhost:5000", "localhost:8080") .AllowAnyHeader() .AllowAnyMethod(); }); });
             
 			//services.AddCors(options => { options.AddPolicy("MyAllowSpecificOrigins", builder => { builder.WithOrigins("localhost:8081") .AllowAnyHeader() .AllowAnyMethod(); }); });

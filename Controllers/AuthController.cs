@@ -14,7 +14,6 @@ using System.Security.Claims;
 using Newtonsoft.Json;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
-using webapi.Models;
 using Microsoft.AspNetCore.Http;
 
 namespace webapi.Controllers{
