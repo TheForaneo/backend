@@ -84,7 +84,7 @@ namespace Nueva_carpeta__4_
             services.AddSingleton<MensajeriaService>();
             //****************************
 
-            //services.AddCors(options => { options.AddPolicy("MyAllowSpecificOrigins", builder => { builder.WithOrigins("localhost:5000", "localhost:8080") .AllowAnyHeader() .AllowAnyMethod(); }); });
+            services.AddCors(options => { options.AddPolicy("MyAllowSpecificOrigins", builder => { builder.WithOrigins("*") .AllowAnyHeader() .AllowAnyMethod(); }); });
             
 			//services.AddCors(options => { options.AddPolicy("MyAllowSpecificOrigins", builder => { builder.WithOrigins("localhost:8081") .AllowAnyHeader() .AllowAnyMethod(); }); });
 			
@@ -101,7 +101,7 @@ namespace Nueva_carpeta__4_
 
             app.UseRouting();
 
-            //app.UseCors("MyAllowSpecificOrigins");
+            app.UseCors("MyAllowSpecificOrigins");
 			
 			/*
 			app.UseCors(builder => builder.WithOrigins("http://localhost:8081")
