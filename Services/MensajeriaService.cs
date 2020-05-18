@@ -13,11 +13,12 @@ namespace webapi.Services{
             _mensajeria = database.GetCollection<Mensajeria>(settings.MensajeriaCollectionName);
         }
 
-        public List<Mensajeria> GetMensajesRecibidosCliente(string idCliente, string idTaller) => _mensajeria.Find<Mensajeria>(mensajeria => mensajeria.Clienteid == idCliente && mensajeria.Tallerid==idTaller).Sort("FechaEnvio").ToList();
+        public List<Mensajeria> GetMensajesRecibidosClienteTaller(string idCliente, string idTaller) => _mensajeria.Find<Mensajeria>(mensajeria => mensajeria.Clienteid == idCliente && mensajeria.Tallerid==idTaller).ToList();
 
-        public List<Mensajeria> GetMensajesRecibidosTaller(string idTaller, string idCliente) => _mensajeria.Find<Mensajeria>(mensajeria => mensajeria.Tallerid == idTaller && mensajeria.Clienteid==idCliente).ToList();
+        public List<Mensajeria> GetMensajesTaller(string idTaller) => _mensajeria.Find<Mensajeria>(mensajeria => mensajeria.Tallerid.Equals(idTaller)).ToList();
+        public List<Mensajeria> GetMensajesCliente(string idCliente) => _mensajeria.Find<Mensajeria>(mensajeria => mensajeria.Clienteid.Equals(idCliente)).ToList();
 
-        public Mensajeria Create(Mensajeria mensaje){
+        public Mensajeria EnviarMensaje(Mensajeria mensaje){
             _mensajeria.InsertOne(mensaje);
             return mensaje;
         }
