@@ -58,8 +58,6 @@ namespace webapi.Controllers
                 message.Subject = "Solictud de Reinicio de Contraseña";
                 //bodyBuilder.HtmlBody= "Querido usuario: "+user.Nombre+" "+user.apellidop+" "+user.apellidom+"."+Environment.NewLine+"Tu codigo para reiniciar tu contraseña es: "+finalString;
                 //message.Body = bodyBuilder.ToMessageBody();
-                 var image = bodyBuilder.LinkedResources.Add (@"..\images\mechaFinder.jpg");
-                 image.ContentId = MimeUtils.GenerateMessageId ();
                 message.Body = new TextPart("plain"){
                     Text = @"Querido Usuario: "+user.Nombre+" "+user.apellidop+" "+user.apellidom+"."+"\n\n"
                     +"Su código para el reinicio de su contraseña es: "+finalString+".\n\n"
