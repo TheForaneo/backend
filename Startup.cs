@@ -26,6 +26,7 @@ namespace Nueva_carpeta__4_
             Configuration = configuration;
         }
 
+        readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -84,10 +85,18 @@ namespace Nueva_carpeta__4_
             services.AddSingleton<MensajeriaService>();
             //****************************
 
-            services.AddCors(options => { options.AddPolicy("MyAllowSpecificOrigins", builder => { builder.WithOrigins() .AllowAnyHeader() .AllowAnyMethod(); }); });
+            //services.AddCors(options => { options.AddPolicy("MyAllowSpecificOrigins", builder => { builder.WithOrigins() .AllowAnyHeader() .AllowAnyMethod(); }); });
             
-			services.AddCors(options => { options.AddPolicy("MyAllowSpecificOrigins", builder => { builder.WithOrigins("*") .AllowAnyHeader() .AllowAnyMethod(); }); });
+			//services.AddCors(options => { options.AddPolicy("MyAllowSpecificOrigins", builder => { builder.WithOrigins("*") .AllowAnyHeader() .AllowAnyMethod(); }); });
 			
+            services.AddCors(options =>
+            {
+                options.AddPolicy(MyAllowSpecificOrigins,
+                builder =>
+                {
+                    builder.WithOrigins("http://localhost:8080").SetIsOriginAllowed(isOriginAllowed: _ => true).AllowAnyHeader().AllowAnyMethod();
+                });
+            });
             services.AddControllers();
         }
 
@@ -101,12 +110,15 @@ namespace Nueva_carpeta__4_
 
             app.UseRouting();
 
-            app.UseCors("MyAllowSpecificOrigins");
+            app.UseCors(MyAllowSpecificOrigins);
+
+            //app.UseCors("MyAllowSpecificOrigins");
 			
-			
+			/*
 			app.UseCors(builder => builder.WithOrigins("*")
                               .AllowAnyMethod()
                               .AllowAnyHeader());
+            */
 
             app.UseAuthentication();
             
