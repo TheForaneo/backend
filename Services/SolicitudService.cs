@@ -26,14 +26,6 @@ namespace webapi.Services{
             _solicitud.InsertOne(solicitud);
             return solicitud;
         } 
-        public int checkFecha(string placa, DateTime fecEntrada){
-            var val = GetV(placa);
-            int fecha1 = val.entrada.Hour;
-            int fecha2 = fecEntrada.Hour;
-            int dif = (fecha2 - fecha1);
-            return dif;
-        }
-
         //public void Update(string id, Solicitud solicitudIn) => _solicitud.ReplaceOne(solicitud => solicitud.Id == id, solicitudIn);
 
         public void Update(string id, Solicitud solicitudIn){
@@ -69,7 +61,7 @@ namespace webapi.Services{
                     }
                 }catch(NullReferenceException ex){}
                  try{
-                    if((solicitudIn.formaPago !=0)){
+                    if((solicitudIn.formaPago.Equals(null))){
                         _solicitud.FindOneAndUpdate(solicitud => solicitud.Id == id, Builders<Solicitud>.Update.Set("formaPago", solicitudIn.formaPago)); 
                     }
                 }catch(NullReferenceException ex){}

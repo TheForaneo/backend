@@ -21,10 +21,10 @@ namespace webapi.Controllers{
         public SolicitudController(SolicitudService solicitudService){
             _solicitudService = solicitudService;
         }
-        /*
+        
         [HttpGet]
         public ActionResult<List<Solicitud>> Get() => _solicitudService.Get();
-        */
+        
         [HttpGet("porCliente/{clienteid:length(24)}", Name="SolicitudesByCliente")]
         public ActionResult<List<Solicitud>> SolicitudesByCliente(string clienteid){ 
             if(_solicitudService.GetSolicitudesByCliente(clienteid).Count >= 1){
@@ -48,7 +48,7 @@ namespace webapi.Controllers{
                 return NoContent();
             }
             _solicitudService.Create(solicitud);
-            return CreatedAtRoute("GetSolicitud", new {id = solicitud.Id.ToString()}, solicitud);
+            return CreatedAtRoute("GetSolicitud", new {solicitudid = solicitud.Id.ToString()}, solicitud);
         }
         [HttpPut]
         public IActionResult Update(string id, Solicitud solicitudIn){

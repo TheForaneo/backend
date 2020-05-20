@@ -14,18 +14,15 @@ namespace webapi.Models{
         public string tiempoProblema{get;set;}
 
         [BsonElement("fechaRealizacion")]
-        [BsonDateTimeOptions(Kind = DateTimeKind.Utc)]
-        public DateTime creacionSolicitid{get; set;}
+        public string creacionSolicitid{get; set;}
 
         [BsonElement("fechaProgramada")]
-        [BsonDateTimeOptions(Kind = DateTimeKind.Utc)]
-        public DateTime entrada{get; set;}
+        public string entrada{get; set;}
 
         [BsonElement("fechaSalida")]
-        [BsonDateTimeOptions(Kind = DateTimeKind.Utc)]
-        public DateTime salida{get; set;}
+        public string salida{get; set;}
 
-        public int formaPago{get; set;}
+        public string formaPago{get; set;}
         public int estado{get; set;}
         public string tallerId{get;set;}
     }

@@ -35,7 +35,7 @@ namespace webapi.Controllers
         [HttpPost]
         public ActionResult<Vehiculo> Create(Vehiculo vehiculo){
             _vehiculoService.Create(vehiculo);
-            return CreatedAtRoute("Get", new {id = vehiculo.Id.ToString()}, vehiculo);
+            return CreatedAtRoute("Get", new {rid = vehiculo.Id.ToString()}, vehiculo);
         }
 
         [HttpPut]

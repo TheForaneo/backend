@@ -152,7 +152,7 @@ namespace webapi.Services{
                 }catch(NullReferenceException ex){}
                 try{
                     if(!(tallerIn.longitud.Equals(null))){
-                        _taller.FindOneAndUpdate(taller => taller.Id == id, Builders<Taller>.Update.Set("longitd", tallerIn.longitud));
+                        _taller.FindOneAndUpdate(taller => taller.Id == id, Builders<Taller>.Update.Set("longitud", tallerIn.longitud));
                     }
                 }catch(NullReferenceException ex){}
                 try{
