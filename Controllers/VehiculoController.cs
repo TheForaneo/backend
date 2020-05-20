@@ -22,23 +22,16 @@ namespace webapi.Controllers
         public VehiculoController(VehiculoService vehiculoService){
             _vehiculoService=vehiculoService;
         }
-
+        /*
         [HttpGet]
         public ActionResult<List<Vehiculo>> Get() => _vehiculoService.Get();
-
-        [HttpGet("{id:length(24)}", Name="GetByCliente")]
-        [Route("[action]")]
+        */
+        [HttpGet("porcliente/{cid:length(24)}", Name="GetByCliente")]
         public ActionResult<List<Vehiculo>> GetByCliente(string cid) => _vehiculoService.GetByCliente(cid);
 
-        [HttpGet("{id:length(24)}", Name="Get")]
-        [Route("action")]
-        public ActionResult<Vehiculo> Get(string id){
-            var vehiculo=_vehiculoService.Get(id);
-            if(vehiculo==null){
-                return NotFound();
-            }
-            return vehiculo;
-        }
+        [HttpGet("getVehiculo/{rid:length(24)}", Name="GetVehiculo")]
+        public ActionResult<Vehiculo> GetVehiculo(string rid) => _vehiculoService.GetVehiculo(rid);
+
         [HttpPost]
         public ActionResult<Vehiculo> Create(Vehiculo vehiculo){
             _vehiculoService.Create(vehiculo);
@@ -47,7 +40,7 @@ namespace webapi.Controllers
 
         [HttpPut]
         public IActionResult Update(string id, Vehiculo vehiculoIn){
-            var vehiculo = _vehiculoService.Get(id);
+            var vehiculo = _vehiculoService.GetVehiculo(id);
             if(vehiculo == null){
                 return NotFound();
             }
@@ -56,7 +49,7 @@ namespace webapi.Controllers
         }
         [HttpDelete("{id:length(24)}")]
         public IActionResult Delete(string id){
-            var vehiculo = _vehiculoService.Get(id);
+            var vehiculo = _vehiculoService.GetVehiculo(id);
             if(vehiculo == null){
                 return NotFound();
             }

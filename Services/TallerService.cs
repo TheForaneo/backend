@@ -41,8 +41,9 @@ namespace webapi.Services{
 
         public Taller GetCorreo(string correo) => _taller.Find<Taller>(taller => taller.correo.Equals(correo)).FirstOrDefault();
 
-         public Taller GetCelular(string celular) => _taller.Find<Taller>(taller => taller.celular == celular).FirstOrDefault();
+        public Taller GetCelular(string celular) => _taller.Find<Taller>(taller => taller.celular == celular).FirstOrDefault();
 
+        public Taller GetByName(string nombre) => _taller.Find<Taller>(taller => taller.nombreTaller == nombre).FirstOrDefault();
         public List<Taller> GetCor(string correo) => _taller.Find<Taller>(taller => taller.correo.Equals(correo)).ToList();
 
         public List<Taller> GetCel(string celular) => _taller.Find<Taller>(taller => taller.celular.Equals(celular)).ToList();
@@ -146,7 +147,7 @@ namespace webapi.Services{
                 }catch(NullReferenceException ex){}
                 try{
                     if(!(tallerIn.latitud.Equals(null))){
-                        _taller.FindOneAndUpdate(taller => taller.Id == id, Builders<Taller>.Update.Set("longitd", tallerIn.latitud));
+                        _taller.FindOneAndUpdate(taller => taller.Id == id, Builders<Taller>.Update.Set("latitud", tallerIn.latitud));
                     }
                 }catch(NullReferenceException ex){}
                 try{

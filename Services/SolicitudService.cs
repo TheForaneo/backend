@@ -17,8 +17,7 @@ namespace webapi.Services{
 
         public List<Solicitud> Get() => _solicitud.Find<Solicitud>(solicitud => true).ToList();
 
-        public Solicitud Get(string id) => _solicitud.Find<Solicitud>(solicitud => solicitud.Id == id).FirstOrDefault();
-
+        public Solicitud GetS(string id) => _solicitud.Find<Solicitud>(solicitud => solicitud.Id.Equals(id)).FirstOrDefault();
         public Solicitud GetV(string placa) => _solicitud.Find<Solicitud>(solicitud => solicitud.placa.Equals(placa)).FirstOrDefault();
 
         public List<Solicitud> GetSolicitudesByCliente(string clienteid) => _solicitud.Find<Solicitud>(solicitud => solicitud.claveCliente.Equals(clienteid)).ToList();

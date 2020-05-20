@@ -26,7 +26,7 @@ namespace webapi.Controllers{
         [HttpGet]
         public ActionResult<List<Taller>> Get() => _tallerService.Get();
         
-        [HttpGet("{tipo}", Name="GetTipo")]
+        [HttpGet("porTipo/{tipo}", Name="GetTipo")]
         public ActionResult<Taller> GetPorTipo(string tipo){
             var list = _tallerService.BuscarPorTaller(tipo);
             if(list != null){
@@ -37,6 +37,14 @@ namespace webapi.Controllers{
         [HttpGet("{id:length(24)}", Name="GetTaller")]
         public ActionResult<Taller> Get(string id){
             var taller = _tallerService.Get(id);
+            if(taller == null){
+                return NotFound();
+            }
+            return taller;
+        }
+        [HttpGet("porNombre/{nombre}", Name="GetNombre")]
+        public ActionResult<Taller> GetNombre(string nombre){
+            var taller = _tallerService.GetByName(nombre);
             if(taller == null){
                 return NotFound();
             }

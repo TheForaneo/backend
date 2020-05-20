@@ -20,7 +20,7 @@ namespace webapi.Services{
 
         public List<Vehiculo> GetByCliente(string id) => _vehiculo.Find<Vehiculo>(vehiculo => vehiculo.cliente.Equals(id)).ToList();
 
-        public Vehiculo Get(string id) => _vehiculo.Find<Vehiculo>(vehiculo => vehiculo.Id == id).FirstOrDefault();
+        public Vehiculo GetVehiculo(string id) => _vehiculo.Find<Vehiculo>(vehiculo => vehiculo.Id.Equals(id)).FirstOrDefault();
 
         public List<Vehiculo> GetV(string placa) => _vehiculo.Find<Vehiculo>(vehiculo => vehiculo.placa.Equals(placa)).ToList();
 

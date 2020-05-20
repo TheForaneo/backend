@@ -94,7 +94,7 @@ namespace Nueva_carpeta__4_
                 options.AddPolicy(MyAllowSpecificOrigins,
                 builder =>
                 {
-                    builder.WithOrigins("http://localhost:8080").SetIsOriginAllowed(isOriginAllowed: _ => true).AllowAnyHeader().AllowAnyMethod();
+                    builder.WithOrigins("*").SetIsOriginAllowed(isOriginAllowed: _ => true).AllowAnyHeader().AllowAnyMethod();
                 });
             });
             services.AddControllers();
