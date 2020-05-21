@@ -22,10 +22,10 @@ namespace webapi.Controllers
         public VehiculoController(VehiculoService vehiculoService){
             _vehiculoService=vehiculoService;
         }
-        /*
+        
         [HttpGet]
         public ActionResult<List<Vehiculo>> Get() => _vehiculoService.Get();
-        */
+        
         [HttpGet("porcliente/{cid:length(24)}", Name="GetByCliente")]
         public ActionResult<List<Vehiculo>> GetByCliente(string cid) => _vehiculoService.GetByCliente(cid);
 
@@ -35,7 +35,7 @@ namespace webapi.Controllers
         [HttpPost]
         public ActionResult<Vehiculo> Create(Vehiculo vehiculo){
             _vehiculoService.Create(vehiculo);
-            return CreatedAtRoute("Get", new {rid = vehiculo.Id.ToString()}, vehiculo);
+            return CreatedAtRoute("GetVehiculo", new {rid = vehiculo.Id.ToString()}, vehiculo);
         }
 
         [HttpPut]
