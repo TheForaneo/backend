@@ -70,7 +70,8 @@ namespace webapi.Controllers{
                 return NotFound();
             }
             _tallerService.Update(id, tallerIn);
-            return Ok();
+            taller = _tallerService.Get(id);
+            return Ok(taller);
         }
 
         [HttpDelete("{id:length(24)}")]

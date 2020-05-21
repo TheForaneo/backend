@@ -26,7 +26,7 @@ namespace webapi.Controllers
         [HttpGet]
         public ActionResult<List<Vehiculo>> Get() => _vehiculoService.Get();
         
-        [HttpGet("porcliente/{cid:length(24)}", Name="GetByCliente")]
+        [HttpGet("porCliente/{cid}", Name="GetByCliente")]
         public ActionResult<List<Vehiculo>> GetByCliente(string cid) => _vehiculoService.GetByCliente(cid);
 
         [HttpGet("getVehiculo/{rid:length(24)}", Name="GetVehiculo")]
@@ -45,7 +45,8 @@ namespace webapi.Controllers
                 return NotFound();
             }
             _vehiculoService.Update(id, vehiculoIn);
-            return Ok();
+            vehiculo = _vehiculoService.GetVehiculo(id);
+            return Ok(vehiculo);
         }
         [HttpDelete("{id:length(24)}")]
         public IActionResult Delete(string id){

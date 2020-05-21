@@ -81,7 +81,8 @@ namespace webapi.Controllers{
                 return NotFound();
             }
             _clienteService.Update(id, clienteIn);
-            return NoContent();
+            cliente = _clienteService.Get(id);
+            return Ok(cliente);
         }
 
         [HttpDelete("{id:length(24)}")]

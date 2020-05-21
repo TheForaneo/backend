@@ -57,7 +57,8 @@ namespace webapi.Controllers{
                 return NotFound();
             }
             _solicitudService.Update(id, solicitudIn);
-            return Ok();
+            solicitud =_solicitudService.GetS(id);
+            return Ok(solicitud);
         }
         [HttpDelete("{id:length(24)}")]
         public IActionResult Delete(string id){
