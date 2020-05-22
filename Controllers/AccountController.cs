@@ -7,9 +7,11 @@ using MailKit.Net.Smtp;
 using Microsoft.AspNetCore.Identity;
 using System;
 using MimeKit.Utils;
+using System.Web.Http.Cors;
 
 namespace webapi.Controllers
 {
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     [Route("api/[controller]")]
     [ApiController]
     public class AccountController : Controller{
