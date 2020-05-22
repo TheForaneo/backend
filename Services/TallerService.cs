@@ -43,7 +43,7 @@ namespace webapi.Services{
 
         public Taller GetCelular(string celular) => _taller.Find<Taller>(taller => taller.celular == celular).FirstOrDefault();
 
-        public Taller GetByName(string nombre) => _taller.Find<Taller>(taller => taller.nombreTaller == nombre).FirstOrDefault();
+        public Taller GetByName(string nombre) => _taller.Find<Taller>(taller => taller.nombreTaller.Equals(nombre)).FirstOrDefault();
         public List<Taller> GetCor(string correo) => _taller.Find<Taller>(taller => taller.correo.Equals(correo)).ToList();
 
         public List<Taller> GetCel(string celular) => _taller.Find<Taller>(taller => taller.celular.Equals(celular)).ToList();
