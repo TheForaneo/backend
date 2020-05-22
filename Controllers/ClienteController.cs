@@ -26,12 +26,6 @@ namespace webapi.Controllers{
             _tallerService = tallerService;
         }
         
-        [HttpPost]
-        public ActionResult<Cliente> GetCorreo(Cliente cliente){
-            var client = _clienteService.GetCorreo(cliente.correo);
-            return client;
-        }
-        
         [HttpGet]
         public ActionResult<List<Cliente>> Get() => _clienteService.Get();
         
@@ -58,22 +52,13 @@ namespace webapi.Controllers{
         public ActionResult<Cliente> Create(Cliente cliente){
             string correo= cliente.correo.ToString();
             var cli = _clienteService.GetCorreo(correo);
-            var tal = _tallerService.GetCorreo(correo);
-            if(cli!=null || tal!=null){
+            if(cli!=null){
                 return BadRequest();
             }
             _clienteService.Create(cliente);
             return CreatedAtRoute("GetCliente", new {id = cliente.Id.ToString()}, cliente);
         }
-        
-        /*
-        [HttpPost("login")]
-        public ActionResult inicio(UserLogin oj){
-            
-            return NotFound();
-            //return RedirectToAction("inicio");
-        }
-        */
+
         [HttpPut]
         public IActionResult Update(string id, Cliente clienteIn){
             var cliente = _clienteService.Get(id);
