@@ -9,6 +9,7 @@ using MongoDB.Bson;
 using webapi.Models;
 using webapi.Services;
 using Microsoft.AspNetCore.Authorization;
+using System.Collections;
 
 namespace webapi.Controllers{
 
@@ -32,10 +33,28 @@ namespace webapi.Controllers{
         [HttpGet("porCliente/{clienteid:length(24)}", Name="SolicitudesByCliente")]
         public ActionResult<List<Solicitud>> SolicitudesByCliente(string clienteid){ 
             if(_solicitudService.GetSolicitudesByCliente(clienteid).Count >= 1){
-                return _solicitudService.GetSolicitudesByCliente(clienteid);
+                List<Solicitud> lista = _solicitudService.GetSolicitudesByCliente(clienteid);
+                Taller taller;
+                Vehiculo veh;
+                for(int i=0; i<lista.Count; i++){
+                    var sol = lista.ElementAt(i);
+                    taller = _tallerService.Get(sol.tallerId);
+                    veh = _vehiculoService.GetV(sol.placa);
+                    sol.nombreTaller= taller.nombreTaller;
+                    sol.modeloVehiculo = veh.modelo;
+                }
+                return lista;
             }
             return NotFound();
         } 
+
+        [HttpGet("porTaller/{tallerid:length(24)}", Name="SolicitudesByTaller")]
+        public ActionResult<List<Solicitud>> SolicitudesByTaller(string tallerid){
+            if(_tallerService.GetCitas(tallerid).Count >= 1){
+                return _tallerService.GetCitas(tallerid);
+            }
+            return NotFound();
+        }
 
         [HttpGet("getSolicitud/{solicitudid:length(24)}", Name="GetSolicitud")]
         public ActionResult GetSolicitud(string solicitudid){

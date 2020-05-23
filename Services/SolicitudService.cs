@@ -66,7 +66,7 @@ namespace webapi.Services{
                     }
                 }catch(NullReferenceException ex){}
                 try{
-                    if((solicitudIn.estado != 0)){
+                    if((solicitudIn.estado.Equals(null))){
                         _solicitud.FindOneAndUpdate(solicitud => solicitud.Id == id, Builders<Solicitud>.Update.Set("estado", solicitudIn.estado)); 
                     }
                 }catch(NullReferenceException ex){}
