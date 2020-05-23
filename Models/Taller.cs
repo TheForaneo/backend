@@ -21,6 +21,7 @@ namespace webapi.Models{
         public string tipoTaller1{get; set;}
         public string tipoTaller2{get; set;}
         public string tipoTaller3{get; set;}
+        public string rol{get; set;}
         public string contraseña{get;set;}
         public string codigo{get;set;}
     }
