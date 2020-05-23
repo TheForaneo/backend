@@ -35,7 +35,7 @@ namespace webapi.Controllers
             }
             return BadRequest();
         }
-        public void SendCorreoCliente(Cliente user){
+        private void SendCorreoCliente(Cliente user){
             var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
             var stringChars = new char[10];
             var random = new Random();
@@ -75,7 +75,7 @@ namespace webapi.Controllers
                 client.Disconnect(true);
             }
         }
-        public void SendCorreoTaller(Taller user){
+        private void SendCorreoTaller(Taller user){
             var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
             var stringChars = new char[10];
             var random = new Random();

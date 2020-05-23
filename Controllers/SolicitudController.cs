@@ -17,9 +17,13 @@ namespace webapi.Controllers{
     //[Authorize]
     public class SolicitudController : Controller{
         private readonly SolicitudService _solicitudService;
+        private readonly VehiculoService _vehiculoService;
+        private readonly TallerService _tallerService;
 
-        public SolicitudController(SolicitudService solicitudService){
+        public SolicitudController(SolicitudService solicitudService, VehiculoService vehiculoService, TallerService tallerService){
             _solicitudService = solicitudService;
+            _tallerService =tallerService;
+            _vehiculoService =vehiculoService;
         }
         
         [HttpGet]
@@ -34,12 +38,14 @@ namespace webapi.Controllers{
         } 
 
         [HttpGet("getSolicitud/{solicitudid:length(24)}", Name="GetSolicitud")]
-        public ActionResult<Solicitud> GetSolicitud(string solicitudid){
+        public ActionResult GetSolicitud(string solicitudid){
             var solicitud = _solicitudService.GetS(solicitudid);
             if(solicitud==null){
                 return NotFound();
             }
-            return solicitud;
+            Vehiculo vehiculo = _vehiculoService.GetV(solicitud.placa);
+            Taller taller = _tallerService.Get(solicitud.tallerId);
+            return Ok((new {solicitud, vehiculo, taller}));
         }
 
         [HttpPost]

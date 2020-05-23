@@ -22,15 +22,15 @@ namespace webapi.Services{
 
         public Vehiculo GetVehiculo(string id) => _vehiculo.Find<Vehiculo>(vehiculo => vehiculo.Id.Equals(id)).FirstOrDefault();
 
-        public List<Vehiculo> GetV(string placa) => _vehiculo.Find<Vehiculo>(vehiculo => vehiculo.placa.Equals(placa)).ToList();
+        public Vehiculo GetV(string placa) => _vehiculo.Find<Vehiculo>(vehiculo => vehiculo.placa.Equals(placa)).FirstOrDefault();
 
         public Vehiculo Create(Vehiculo vehiculo){
             _vehiculo.InsertOne(vehiculo);
             return vehiculo;
         }
 
-        public int checkV(string placa) {
-            var cont = GetV(placa).Count;
+        public Vehiculo checkV(string placa) {
+            var cont = GetV(placa);
             return cont;
         }
         
@@ -39,7 +39,7 @@ namespace webapi.Services{
             if(vehiculoIn != null){
                 try{
                     if(!(vehiculoIn.placa.Equals(null))){
-                        if(!(checkV(vehiculoIn.placa)>=1)){
+                        if(!(checkV(vehiculoIn.placa)==null)){
                             _vehiculo.FindOneAndUpdate(vehiculo => vehiculo.Id == id, Builders<Vehiculo>.Update.Set("placa", vehiculoIn.placa));
                         }
                     }

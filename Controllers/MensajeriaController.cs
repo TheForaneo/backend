@@ -14,8 +14,8 @@ namespace webapi.Controllers{
         }
 
         [HttpGet("{idCliente:length(24)}/{idTaller:length(24)}", Name="GetMensajesClienteTaller")]
-        public ActionResult<List<Mensajeria>> GetMensajesClienteTaller(string cliente, string taller){
-            return _mensajeria.GetMensajesRecibidosClienteTaller(cliente, taller);
+        public ActionResult<List<Mensajeria>> GetMensajesClienteTaller(string idCliente, string idTaller){
+            return _mensajeria.GetMensajesRecibidosClienteTaller(idCliente, idTaller);
             
         }
         
