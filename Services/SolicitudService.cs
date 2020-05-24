@@ -51,22 +51,27 @@ namespace webapi.Services{
                     }
                 }catch(NullReferenceException ex){}
                 try{
-                    if((solicitudIn.entrada.Equals(null))){
+                    if(!(solicitudIn.entrada.Equals(null))){
                         _solicitud.FindOneAndUpdate(solicitud => solicitud.Id == id, Builders<Solicitud>.Update.Set("fechaProgramada", solicitudIn.entrada));
                     }
                 }catch(NullReferenceException ex){}
                 try{
-                    if((solicitudIn.salida.Equals(null))){
+                    if(!(solicitudIn.salida.Equals(null))){
                         _solicitud.FindOneAndUpdate(solicitud => solicitud.Id==id, Builders<Solicitud>.Update.Set("fechaSalida", solicitudIn.salida));
                     }
                 }catch(NullReferenceException ex){}
-                 try{
-                    if((solicitudIn.formaPago.Equals(null))){
+                try{
+                    if(!(solicitudIn.formaPago.Equals(null))){
                         _solicitud.FindOneAndUpdate(solicitud => solicitud.Id == id, Builders<Solicitud>.Update.Set("formaPago", solicitudIn.formaPago)); 
                     }
                 }catch(NullReferenceException ex){}
                 try{
-                    if((solicitudIn.estado.Equals(null))){
+                    if(!(solicitudIn.montoEstimado==0)){
+                        _solicitud.FindOneAndUpdate(solicitud => solicitud.Id == id, Builders<Solicitud>.Update.Set("montoEstimado", solicitudIn.montoEstimado)); 
+                    }
+                }catch(NullReferenceException ex){}
+                try{
+                    if(!(solicitudIn.estado.Equals(null))){
                         _solicitud.FindOneAndUpdate(solicitud => solicitud.Id == id, Builders<Solicitud>.Update.Set("estado", solicitudIn.estado)); 
                     }
                 }catch(NullReferenceException ex){}

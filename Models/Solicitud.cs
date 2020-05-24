@@ -22,10 +22,9 @@ namespace webapi.Models{
 
         [BsonElement("fechaSalida")]
         public string salida{get; set;}
-
         public string formaPago{get; set;}
+        public Double montoEstimado{get; set;}
         public string estado{get; set;}
-
         public string nombreTaller{get; set;}
         public string tallerId{get;set;}
     }

@@ -56,6 +56,7 @@ namespace webapi.Controllers{
                 return BadRequest();
             }
             _clienteService.Create(cliente);
+            cliente.role="Cliente";
             return CreatedAtRoute("GetCliente", new {id = cliente.Id.ToString()}, cliente);
         }
 

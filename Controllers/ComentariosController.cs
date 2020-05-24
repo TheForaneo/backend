@@ -28,6 +28,10 @@ namespace webapi.Controllers{
         public ActionResult<List<Comentario>> GetCT(string id){
             return _comentarios.GetporTaller(id);
         }
+        [HttpGet("Comentario/{idComentario}", Name="GetComentario")]
+        public ActionResult<Comentario> GetComentario(string idComentario){
+            return _comentarios.GetComentario(idComentario);
+        } 
         
         [HttpPost]
         public ActionResult<Comentario> Create(Comentario comentario){

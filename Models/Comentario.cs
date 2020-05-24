@@ -7,9 +7,9 @@ namespace webapi.Models{
         [BsonRepresentation(BsonType.ObjectId)]
         [BsonIgnoreIfDefault]
         public string Id{get; private set;}
-        public string IdTaller{get; set;}
+        public string idTaller{get; set;}
         [BsonElement("Comentario")]
-        public string comentairo{get; set;}
-        public string IdCliente{get; set;}
+        public string comentario{get; set;}
+        public string idCliente{get; set;}
     }
 }

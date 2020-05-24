@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using webapi.Models;
@@ -9,6 +10,7 @@ namespace webapi.Controllers{
     //[Authorize]
     public class MensajeriaController : Controller{
         private readonly MensajeriaService _mensajeria;   
+        DateTime date = new DateTime();
         public MensajeriaController(MensajeriaService mensajeria){
             _mensajeria = mensajeria;
         }
@@ -33,8 +35,8 @@ namespace webapi.Controllers{
             return null;
         }
         public void EnviaraCliente(Mensajeria Mensaje){
+            Mensaje.FechaEnvio=DateTime.Now;
             _mensajeria.EnviarMensaje(Mensaje);
-
         }
     }
 }

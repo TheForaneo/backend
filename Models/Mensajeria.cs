@@ -10,7 +10,7 @@ namespace webapi.Models{
         public string id{get; set;}
         public string Clienteid{get; set;}
         public string Mensaje{get; set;}
-        //public DateTime FechaEnvio{get;set;}
+        public DateTime FechaEnvio{get;set;}
         public string Tallerid{get; set;}
     }
 }

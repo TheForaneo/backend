@@ -59,6 +59,7 @@ namespace webapi.Controllers{
             if(cli != null || tal != null){
                 return BadRequest();
             }
+            taller.role="Taller";
             _tallerService.Create(taller);
             return CreatedAtRoute("GetTaller", new {id = taller.Id.ToString()}, taller);
         }

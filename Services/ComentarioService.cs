@@ -15,8 +15,8 @@ namespace webapi.Services{
             _comentario = database.GetCollection<Comentario>(settings.ComentariosCollectionName);
         }
 
-        public List<Comentario> GetporTaller(string idT) => _comentario.Find<Comentario>(comentario => comentario.IdTaller.Equals(idT)).ToList();
-        public List<Comentario> GetporCliente(string idC) => _comentario.Find<Comentario>(comentario => comentario.IdCliente==idC).ToList();
+        public List<Comentario> GetporTaller(string idT) => _comentario.Find<Comentario>(comentario => comentario.idTaller.Equals(idT)).ToList();
+        public List<Comentario> GetporCliente(string idC) => _comentario.Find<Comentario>(comentario => comentario.idCliente==idC).ToList();
         public Comentario GetComentario(string id) => _comentario.Find<Comentario>(comentario => comentario.Id == id).FirstOrDefault(); 
         public Comentario Create(Comentario comentario){
             _comentario.InsertOne(comentario);
@@ -25,8 +25,8 @@ namespace webapi.Services{
         public void Update(string id, Comentario comentarioIn){
             if(comentarioIn != null){
                 try{
-                    if(!(comentarioIn.comentairo.Equals(null))){
-                        _comentario.FindOneAndUpdate(comentario => comentario.Id == id, Builders<Comentario>.Update.Set("Comentario", comentarioIn.comentairo));
+                    if(!(comentarioIn.comentario.Equals(null))){
+                        _comentario.FindOneAndUpdate(comentario => comentario.Id == id, Builders<Comentario>.Update.Set("Comentario", comentarioIn.comentario));
                     }
                 }
                 catch(NullReferenceException ex){}
