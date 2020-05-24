@@ -73,7 +73,7 @@ namespace webapi.Controllers{
                     Subject = new ClaimsIdentity(new Claim[]{
                         new Claim(ClaimTypes.NameIdentifier, userC.Id.ToString()),
                         new Claim(ClaimTypes.Email, userC.correo),
-                        new Claim(ClaimTypes.Role, userC.rol)
+                        new Claim(ClaimTypes.Role, userC.role)
                     }),
                     Expires = DateTime.UtcNow.AddDays(1),
                     SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
@@ -90,7 +90,7 @@ namespace webapi.Controllers{
                     Subject = new ClaimsIdentity(new Claim[]{
                         new Claim(ClaimTypes.NameIdentifier, userT.Id.ToString()),
                         new Claim(ClaimTypes.Email, userT.correo),
-                        new Claim(ClaimTypes.Role, userT.rol)
+                        new Claim(ClaimTypes.Role, userT.role)
                     }),
                     Expires = DateTime.UtcNow.AddDays(1),
                     SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)

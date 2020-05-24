@@ -31,8 +31,8 @@ namespace webapi.Models{
         [BsonElement ("correo")]
         public string correo { get; set; }
 
-        [BsonElement("rol")]
-        public string rol{get; set;}
+        [BsonElement("role")]
+        public string role{get; set;}
 
         [BsonElement ("contraseña")]
         public string contraseña { get; set; }

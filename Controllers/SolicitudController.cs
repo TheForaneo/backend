@@ -21,6 +21,8 @@ namespace webapi.Controllers{
         private readonly VehiculoService _vehiculoService;
         private readonly TallerService _tallerService;
 
+        DateTime date = new DateTime();
+
         public SolicitudController(SolicitudService solicitudService, VehiculoService vehiculoService, TallerService tallerService){
             _solicitudService = solicitudService;
             _tallerService =tallerService;
@@ -72,7 +74,11 @@ namespace webapi.Controllers{
             if(solicitud==null/*_solicitudService.checkFecha(solicitud.placa, solicitud.entrada)<=2*/){
                 return NoContent();
             }
+            DateTime dateOnly = DateTime.Now;
+            var date1=dateOnly.Date;
+            solicitud.creacionSolicitid=date1.ToString("d");
             _solicitudService.Create(solicitud);
+
             return CreatedAtRoute("GetSolicitud", new {solicitudid = solicitud.Id.ToString()}, solicitud);
         }
         [HttpPut]
