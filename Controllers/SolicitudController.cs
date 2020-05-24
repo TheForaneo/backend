@@ -71,7 +71,8 @@ namespace webapi.Controllers{
 
         [HttpPost]
         public ActionResult<Solicitud> Create(Solicitud solicitud){
-            if(solicitud==null/*_solicitudService.checkFecha(solicitud.placa, solicitud.entrada)<=2*/){
+            var vehiculo =_solicitudService.GetV(solicitud.placa);
+            if(vehiculo != null){
                 return NoContent();
             }
             DateTime dateOnly = DateTime.Now;
