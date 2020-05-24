@@ -55,8 +55,8 @@ namespace webapi.Controllers{
             if(cli!=null){
                 return BadRequest();
             }
-            _clienteService.Create(cliente);
             cliente.role="Cliente";
+            _clienteService.Create(cliente);
             return CreatedAtRoute("GetCliente", new {id = cliente.Id.ToString()}, cliente);
         }
 
