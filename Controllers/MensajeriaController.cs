@@ -35,6 +35,14 @@ namespace webapi.Controllers{
             } 
             return lista;
         }
+        [HttpGet("utlimo/{clienteid:length(24)}/{tallerid:length(24)}", Name="GetLast")]
+        public ActionResult<Mensajeria> getLast(string clienteid, string tallerid){
+            if(_mensajeria.GetMensajesRecibidosClienteTaller(clienteid, tallerid)==null){
+                return NoContent();
+            }
+            List<Mensajeria> lista = _mensajeria.GetMensajesRecibidosClienteTaller(clienteid, tallerid);
+            return lista.LastOrDefault();;
+        }
         
         //[Route("[action]/")]
         [HttpGet("{id:length(24)}", Name="GetMensajes")]

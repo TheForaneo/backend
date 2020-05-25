@@ -11,7 +11,6 @@ using System.Web.Http.Cors;
 
 namespace webapi.Controllers
 {
-    [EnableCors(origins: "*", headers: "*", methods: "*")]
     [Route("api/[controller]")]
     [ApiController]
     public class AccountController : Controller{
