@@ -42,6 +42,14 @@ namespace webapi.Controllers{
                     var sol = lista.ElementAt(i);
                     taller = _tallerService.Get(sol.tallerId);
                     veh = _vehiculoService.GetV(sol.placa);
+                    if(taller == null){
+                        _solicitudService.Remove(sol.Id);
+                        return BadRequest();
+                    }
+                    if(veh == null){
+                        _solicitudService.Remove(sol.Id);
+                        return BadRequest();
+                    }
                     sol.nombreTaller= taller.nombreTaller;
                     sol.modeloVehiculo = veh.modelo;
                 }
@@ -60,6 +68,14 @@ namespace webapi.Controllers{
                     var sol = lista.ElementAt(i);
                     taller = _tallerService.Get(sol.tallerId);
                     veh = _vehiculoService.GetV(sol.placa);
+                    if(taller == null){
+                        _solicitudService.Remove(sol.Id);
+                        return BadRequest();
+                    }
+                    if(veh == null){
+                        _solicitudService.Remove(sol.Id);
+                        return BadRequest();
+                    }
                     sol.nombreTaller= taller.nombreTaller;
                     sol.modeloVehiculo = veh.modelo;
                 }
@@ -76,6 +92,14 @@ namespace webapi.Controllers{
             }
             Vehiculo vehiculo = _vehiculoService.GetV(solicitud.placa);
             Taller taller = _tallerService.Get(solicitud.tallerId);
+            if(taller == null){
+                _solicitudService.Remove(solicitud.Id);
+                return BadRequest();
+            }
+            if(vehiculo == null){
+                _solicitudService.Remove(solicitud.Id);
+                return BadRequest();
+            }
             return Ok((new {solicitud, vehiculo, taller}));
         }
 
