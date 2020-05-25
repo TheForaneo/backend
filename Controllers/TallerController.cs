@@ -18,9 +18,12 @@ namespace webapi.Controllers{
         private readonly TallerService _tallerService ;
         private readonly ClienteService _clienteService;
 
-        public TallerController(TallerService tallerService, ClienteService clienteService){
+        private readonly SolicitudService _solicitudService;
+
+        public TallerController(TallerService tallerService, ClienteService clienteService, SolicitudService solicitudService){
             _tallerService=tallerService;
             _clienteService = clienteService;
+            _solicitudService=solicitudService;
         }
         
         [HttpGet]
@@ -78,10 +81,16 @@ namespace webapi.Controllers{
         [HttpDelete("{id:length(24)}")]
         public IActionResult Delete(string id){
             var taller = _tallerService.Get(id);
+            List<Solicitud> lista = _tallerService.GetCitas(id);
             if(taller==null){
                 return NotFound();
             }
             _tallerService.Remove(taller.Id);
+            if(lista!=null){
+                for(int i=0; i<lista.Count; i++){
+                    _solicitudService.Remove(lista.ElementAt(i).Id);
+                }
+            }
             return Ok();
         }
     }

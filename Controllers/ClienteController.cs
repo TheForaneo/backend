@@ -19,11 +19,13 @@ namespace webapi.Controllers{
     //[Authorize]
     public class ClienteController:Controller{
         private readonly ClienteService _clienteService;
+        private readonly VehiculoService _vehiculoService;
         private readonly TallerService _tallerService;
 
-        public ClienteController(ClienteService clienteService, TallerService tallerService){
+        public ClienteController(ClienteService clienteService, TallerService tallerService, VehiculoService vehiculoService){
             _clienteService=clienteService;
             _tallerService = tallerService;
+            _vehiculoService=vehiculoService;
         }
         
         [HttpGet]
@@ -77,7 +79,13 @@ namespace webapi.Controllers{
             if(cliente==null){
                 return NotFound();
             }
+            List<Vehiculo> lista = _vehiculoService.GetByCliente(cliente.Id);
             _clienteService.Remove(cliente.Id);
+            if(lista != null){
+                for(int i=0; i<lista.Count; i++){
+                _vehiculoService.Remove(lista.ElementAt(i).Id);
+            }    
+            }
             return NoContent();
         }
     }
