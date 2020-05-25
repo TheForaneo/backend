@@ -53,7 +53,17 @@ namespace webapi.Controllers{
         [HttpGet("porTaller/{tallerid:length(24)}", Name="SolicitudesByTaller")]
         public ActionResult<List<Solicitud>> SolicitudesByTaller(string tallerid){
             if(_tallerService.GetCitas(tallerid).Count >= 1){
-                return _tallerService.GetCitas(tallerid);
+                List<Solicitud> lista = _tallerService.GetCitas(tallerid);
+                Taller taller;
+                Vehiculo veh;
+                for(int i=0; i<lista.Count; i++){
+                    var sol = lista.ElementAt(i);
+                    taller = _tallerService.Get(sol.tallerId);
+                    veh = _vehiculoService.GetV(sol.placa);
+                    sol.nombreTaller= taller.nombreTaller;
+                    sol.modeloVehiculo = veh.modelo;
+                }
+                return lista;
             }
             return NotFound();
         }
