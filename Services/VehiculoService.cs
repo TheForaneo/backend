@@ -8,6 +8,7 @@ namespace webapi.Services{
 
     public class VehiculoService{
         private readonly IMongoCollection<Vehiculo> _vehiculo;
+        private readonly IMongoCollection<Solicitud> _solicitud;
         
         public VehiculoService(IVehiculostoreDatabaseSettings settings){
             var client = new MongoClient(settings.ConnectionString);
@@ -69,7 +70,10 @@ namespace webapi.Services{
         }
         public void Remove(Vehiculo vehiculoIn) => _vehiculo.DeleteOne(vehiculo => vehiculo.Id == vehiculoIn.Id);
 
-        public void Remove(string id) => _vehiculo.DeleteOne(vehiculo=> vehiculo.Id==id);
+        public void Remove(string id){
+            var vehiculo = this.GetVehiculo(id);
+            _vehiculo.DeleteOne(vehiculo=> vehiculo.Id==id);
+        } 
     }
     
 

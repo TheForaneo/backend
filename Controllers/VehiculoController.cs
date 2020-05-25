@@ -19,8 +19,10 @@ namespace webapi.Controllers
     //[Authorize]
     public class VehiculoController : Controller{
         private readonly VehiculoService _vehiculoService;
-        public VehiculoController(VehiculoService vehiculoService){
+        private readonly SolicitudService _solicitudService;
+        public VehiculoController(VehiculoService vehiculoService, SolicitudService solicitudService){
             _vehiculoService=vehiculoService;
+            _solicitudService=solicitudService;
         }
         
         [HttpGet]
@@ -51,11 +53,15 @@ namespace webapi.Controllers
         [HttpDelete("{id:length(24)}")]
         public IActionResult Delete(string id){
             var vehiculo = _vehiculoService.GetVehiculo(id);
+            var soli = _solicitudService.GetV(vehiculo.placa);
             if(vehiculo == null){
                 return NotFound();
             }
             var filter = Builders<BsonDocument>.Filter.Eq("id",id);
             _vehiculoService.Remove(vehiculo.Id);
+            if(soli != null){
+                _solicitudService.Remove(soli.Id);
+            }
             return Ok();
         }
     }
