@@ -26,6 +26,7 @@ namespace webapi.Models{
         public Double montoEstimado{get; set;}
         public string estado{get; set;}
         public string nombreTaller{get; set;}
+        public Comentario comentario{get; set;}
         public string tallerId{get;set;}
     }
 }
