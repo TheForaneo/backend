@@ -106,7 +106,7 @@ namespace webapi.Controllers{
         [HttpPost]
         public ActionResult<Solicitud> Create(Solicitud solicitud){
             var vehiculo =_solicitudService.GetV(solicitud.placa);
-            if(vehiculo != null){
+            if(vehiculo != null && (!vehiculo.estado.Equals("Finalizado"))){
                 return NoContent();
             }
             DateTime dateOnly = DateTime.Now;

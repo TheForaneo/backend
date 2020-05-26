@@ -15,12 +15,31 @@ namespace webapi.Services{
             _solicitud = database.GetCollection<Solicitud>(settings.SolicitudCollectionName);
         }
 
-        public List<Solicitud> Get() => _solicitud.Find<Solicitud>(solicitud => true).ToList();
+        public List<Solicitud> Get() => _solicitud.Find<Solicitud>(solicitud => true ).ToList();
 
         public Solicitud GetS(string id) => _solicitud.Find<Solicitud>(solicitud => solicitud.Id.Equals(id)).FirstOrDefault();
         public Solicitud GetV(string placa) => _solicitud.Find<Solicitud>(solicitud => solicitud.placa.Equals(placa)).FirstOrDefault();
         public List<Solicitud> GetSolicitudesByCliente(string clienteid) => _solicitud.Find<Solicitud>(solicitud => solicitud.claveCliente.Equals(clienteid)).ToList();
-        
+        public List<Solicitud> GetSolicitudesByClienteRecientes(string clienteid){
+            List<Solicitud> lista = this.GetSolicitudesByCliente(clienteid);
+            List<Solicitud> lista2=null;
+            for(int i=0; i<lista.Count; i++){
+                if(!(lista.ElementAt(i).estado.Equals("Finalizado"))){
+                    lista2.Add(lista.ElementAt(i));
+                }
+            }
+            return lista2;
+        }
+        public List<Solicitud> GetSolicitudesByClienteFinalizadas(string clienteid){
+            List<Solicitud> lista = this.GetSolicitudesByCliente(clienteid);
+            List<Solicitud> lista2=null;
+            for(int i=0; i<lista.Count; i++){
+                if((lista.ElementAt(i).estado.Equals("Finalizado"))){
+                    lista2.Add(lista.ElementAt(i));
+                }
+            }
+            return lista2;
+        }
         public Solicitud Create(Solicitud solicitud){
             _solicitud.InsertOne(solicitud);
             return solicitud;
