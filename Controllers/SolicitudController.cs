@@ -74,10 +74,12 @@ namespace webapi.Controllers{
                 List<Solicitud> lista = _tallerService.GetCitas(tallerid);
                 Taller taller;
                 Vehiculo veh;
+                Comentario comentario;
                 for(int i=0; i<lista.Count; i++){
                     var sol = lista.ElementAt(i);
                     taller = _tallerService.Get(sol.tallerId);
                     veh = _vehiculoService.GetV(sol.placa);
+                    comentario = _comentarioService.GetBySolicitud(sol.Id);
                     if(taller == null){
                         _solicitudService.Remove(sol.Id);
                         return BadRequest();
@@ -88,6 +90,12 @@ namespace webapi.Controllers{
                     }
                     sol.nombreTaller= taller.nombreTaller;
                     sol.modeloVehiculo = veh.modelo;
+                     if(!(comentario == null)){
+                        sol.comentario = comentario;
+                    }
+                    else{
+                        sol.comentario=null;
+                    }
                 }
                 return lista;
             }
