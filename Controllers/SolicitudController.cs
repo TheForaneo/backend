@@ -19,14 +19,16 @@ namespace webapi.Controllers{
     public class SolicitudController : Controller{
         private readonly SolicitudService _solicitudService;
         private readonly VehiculoService _vehiculoService;
+        private readonly ComentarioService _comentarioService;
         private readonly TallerService _tallerService;
 
         DateTime date = new DateTime();
 
-        public SolicitudController(SolicitudService solicitudService, VehiculoService vehiculoService, TallerService tallerService){
+        public SolicitudController(ComentarioService comentarioService, SolicitudService solicitudService, VehiculoService vehiculoService, TallerService tallerService){
             _solicitudService = solicitudService;
             _tallerService =tallerService;
             _vehiculoService =vehiculoService;
+            _comentarioService = comentarioService;
         }
         
         [HttpGet]
@@ -92,6 +94,7 @@ namespace webapi.Controllers{
             }
             Vehiculo vehiculo = _vehiculoService.GetV(solicitud.placa);
             Taller taller = _tallerService.Get(solicitud.tallerId);
+            Comentario comentario=_comentarioService.GetBySolicitud(solicitudid);
             if(taller == null){
                 _solicitudService.Remove(solicitud.Id);
                 return BadRequest();
@@ -100,7 +103,11 @@ namespace webapi.Controllers{
                 _solicitudService.Remove(solicitud.Id);
                 return BadRequest();
             }
-            return Ok((new {solicitud, vehiculo, taller}));
+            if(comentario == null){
+                comentario=null;
+                return Ok((new {solicitud, vehiculo, taller, comentario}));
+            }
+            return Ok((new {solicitud, vehiculo, taller, comentario}));
         }
 
         [HttpPost]

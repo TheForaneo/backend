@@ -18,6 +18,7 @@ namespace webapi.Services{
         public List<Comentario> GetporTaller(string idT) => _comentario.Find<Comentario>(comentario => comentario.idTaller.Equals(idT)).ToList();
         public List<Comentario> GetporCliente(string idC) => _comentario.Find<Comentario>(comentario => comentario.idCliente==idC).ToList();
         public Comentario GetComentario(string id) => _comentario.Find<Comentario>(comentario => comentario.Id == id).FirstOrDefault(); 
+        public Comentario GetBySolicitud(string sid) => _comentario.Find<Comentario>(comentario => comentario.idSolicitud.Equals(sid)).FirstOrDefault();
         public Comentario Create(Comentario comentario){
             _comentario.InsertOne(comentario);
             return comentario;
